@@ -3,86 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aldair Adriano Quispe Ccoito - Desarrollador</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Aldair Adriano Quispe Ccoito - Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --midnight: #0a192f;
-            --slate: #1e293b;
-            --steel: #334155;
-            --silver: #64748b;
-            --frost: #cbd5e1;
-            --gold: #d4a574;
-            --amber: #f59e0b;
-            --accent: #3b82f6;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background: var(--midnight);
-            color: var(--frost);
-            line-height: 1.6;
-            overflow-x: hidden;
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff00e6;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --text-light: #e0e7ff;
+            --text-muted: #94a3b8;
         }
 
-        /* Animated Background */
-        .bg-pattern {
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efecto de grid futurista en el fondo */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.03;
             background-image: 
-                linear-gradient(45deg, var(--steel) 25%, transparent 25%),
-                linear-gradient(-45deg, var(--steel) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, var(--steel) 75%),
-                linear-gradient(-45deg, transparent 75%, var(--steel) 75%);
-            background-size: 60px 60px;
-            background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
-            animation: slidePattern 20s linear infinite;
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
         }
 
-        @keyframes slidePattern {
-            0% { background-position: 0 0, 0 30px, 30px -30px, -30px 0px; }
-            100% { background-position: 60px 60px, 60px 90px, 90px 30px, 30px 60px; }
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
         }
 
-        /* Navigation */
+        /* Navegación futurista */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
             z-index: 1000;
-            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 1rem 0;
         }
 
         nav .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem 2rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        nav .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--gold), var(--amber));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--neon-blue);
+            text-decoration: none;
+            text-shadow: 0 0 20px var(--neon-blue),
+                         0 0 40px var(--neon-blue);
+            letter-spacing: 3px;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 30px var(--neon-blue),
+                         0 0 60px var(--neon-blue),
+                         0 0 90px var(--neon-blue);
         }
 
         nav ul {
@@ -92,14 +99,15 @@
         }
 
         nav a {
-            color: var(--frost);
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            transition: all 0.3s ease;
             position: relative;
+            transition: all 0.3s;
         }
 
         nav a::after {
@@ -109,8 +117,13 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
         }
 
         nav a:hover::after {
@@ -119,135 +132,156 @@
 
         /* Hero Section */
         .hero {
-            position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 2rem;
-            overflow: hidden;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
         }
 
-        .hero-label {
+        .code-tag {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
             font-size: 0.85rem;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            font-weight: 500;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.2s;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff, var(--frost));
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.4s;
+            letter-spacing: 5px;
+            animation: glitch 3s infinite;
         }
 
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--silver);
-            margin-bottom: 2.5rem;
-            max-width: 700px;
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translateX(0); }
+            93% { transform: translateX(-2px); }
+            96% { transform: translateX(2px); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
             font-weight: 300;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.6s;
+            letter-spacing: 1px;
         }
 
-        .hero-cta {
+        .btn-group {
             display: flex;
             gap: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.8s;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
+            font-family: 'Orbitron', sans-serif;
             padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
+            border: 2px solid var(--neon-blue);
+            background: transparent;
+            color: var(--neon-blue);
             text-decoration: none;
-            border-radius: 0;
-            transition: all 0.4s ease;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .btn-primary {
-            background: var(--gold);
-            color: var(--midnight);
-            border-color: var(--gold);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-blue);
+            transition: left 0.3s;
+            z-index: -1;
         }
 
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+        .btn:hover {
+            color: var(--darker-bg);
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .btn:hover::before {
+            left: 0;
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--frost);
-            border-color: var(--steel);
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .btn-secondary::before {
+            background: var(--neon-purple);
         }
 
         .btn-secondary:hover {
-            border-color: var(--frost);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(203, 213, 225, 0.1);
+            box-shadow: 0 0 30px var(--neon-purple);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Stats Section */
+        /* Stats */
         .stats {
-            position: relative;
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, var(--midnight) 0%, var(--slate) 100%);
-        }
-
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
         }
 
         .stat-card {
-            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
             padding: 2rem;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(212, 165, 116, 0.1);
-            transition: all 0.4s ease;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
@@ -255,500 +289,357 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            transition: left 0.6s ease;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
         }
 
         .stat-card:hover::before {
-            left: 100%;
+            transform: rotate(45deg) translate(50%, 50%);
         }
 
         .stat-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
             transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 20px 50px rgba(212, 165, 116, 0.2);
         }
 
         .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
             font-weight: 900;
-            color: var(--gold);
+            color: var(--neon-blue);
             margin-bottom: 0.5rem;
-            display: block;
+            text-shadow: 0 0 20px var(--neon-blue);
         }
 
         .stat-label {
             font-size: 0.9rem;
-            color: var(--silver);
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 500;
         }
 
-        /* About Section */
-        .about {
-            padding: 8rem 2rem;
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
             position: relative;
         }
 
-        .section-header {
+        .container {
             max-width: 1400px;
-            margin: 0 auto 5rem;
-        }
-
-        .section-label {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            font-weight: 600;
+            margin: 0 auto;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
             font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        /* About Section */
         .about-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--silver);
-        }
-
-        .about-text p {
+        .about-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
             margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .skill-item {
-            background: rgba(30, 41, 59, 0.5);
+        .skill-card {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(0, 243, 255, 0.2);
             padding: 2rem;
-            border-left: 3px solid var(--gold);
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
         }
 
-        .skill-item:hover {
-            background: rgba(30, 41, 59, 0.8);
-            transform: translateX(10px);
+        .skill-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            transform: translateY(-10px);
         }
 
-        .skill-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #ffffff;
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
             margin-bottom: 0.5rem;
-        }
-
-        .skill-desc {
-            font-size: 0.9rem;
-            color: var(--silver);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, var(--midnight) 0%, var(--slate) 100%);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Tabs */
-        .tabs-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .tabs-nav {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            border-bottom: 2px solid var(--steel);
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: none;
-            color: var(--silver);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .tab-btn:hover {
-            color: var(--gold);
-        }
-
-        .tab-btn.active {
-            color: var(--gold);
-            border-bottom-color: var(--gold);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            font-size: 1.3rem;
         }
 
         /* Week Sections */
         .week-section {
-            background: rgba(30, 41, 59, 0.3);
-            border: 1px solid rgba(212, 165, 116, 0.2);
-            margin-bottom: 2rem;
-            border-radius: 4px;
-            overflow: hidden;
+            margin-bottom: 3rem;
         }
 
         .week-header {
-            padding: 1.5rem 2rem;
-            background: rgba(30, 41, 59, 0.6);
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(191, 0, 255, 0.1));
+            border: 1px solid var(--neon-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
-            user-select: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .week-header:hover::before {
+            left: 100%;
         }
 
         .week-header:hover {
-            background: rgba(30, 41, 59, 0.9);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            transform: translateX(10px);
         }
 
         .week-header h3 {
-            color: #ffffff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .week-toggle {
-            color: var(--gold);
+        .toggle-icon {
             font-size: 1.5rem;
-            transition: transform 0.3s ease;
-            font-weight: bold;
-        }
-
-        .week-section.open .week-toggle {
-            transform: rotate(180deg);
+            color: var(--neon-blue);
+            transition: transform 0.3s;
         }
 
         .week-content {
-            display: none;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-top: none;
+            padding: 0;
+            border-radius: 0 0 10px 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .week-content.active {
+            max-height: 100000px;
             padding: 2rem;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        .week-section.open .week-content {
-            display: block;
-        }
-
-        .week-desc {
-            color: var(--silver);
-            font-style: italic;
-            text-align: center;
-            padding: 2rem 0;
-            font-size: 1.1rem;
-        }
-
-        /* Exercise Cards */
-        .exercise-card {
-            background: rgba(10, 25, 47, 0.7);
-            border: 1px solid rgba(212, 165, 116, 0.2);
-            border-radius: 4px;
-            padding: 2.5rem;
+        /* Exercises */
+        .exercise {
             margin-bottom: 3rem;
-            transition: all 0.3s ease;
-        }
-
-        .exercise-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 10px 40px rgba(212, 165, 116, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .exercise-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .exercise-number {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--midnight);
-            padding: 0.4rem 1rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .exercise-header h4 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-        }
-
-        .exercise-desc {
-            color: var(--silver);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        /* Code Block */
-        .code-block {
-            background: #0d1117;
-            border: 2px solid var(--steel);
-            border-radius: 6px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .code-header {
-            background: rgba(212, 165, 116, 0.15);
-            padding: 0.9rem 1.5rem;
-            color: var(--gold);
-            font-size: 0.9rem;
-            font-weight: 700;
-            border-bottom: 2px solid var(--steel);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .code-block pre {
-            margin: 0;
-            padding: 2rem;
-            overflow-x: auto;
-        }
-
-        .code-block code {
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #e6edf3;
-            display: block;
-        }
-
-        /* Output Block */
-        .output-block {
-            background: rgba(30, 41, 59, 0.6);
-            border: 2px solid rgba(100, 116, 139, 0.4);
-            border-radius: 6px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .output-header {
-            background: rgba(100, 116, 139, 0.3);
-            padding: 0.9rem 1.5rem;
-            color: var(--frost);
-            font-size: 0.9rem;
-            font-weight: 700;
-            border-bottom: 2px solid rgba(100, 116, 139, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .output-block pre {
-            margin: 0;
-            padding: 2rem;
-            color: #00ff88;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Form Section */
-        .add-project {
-            padding: 8rem 2rem;
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 2rem;
             position: relative;
         }
 
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 4rem;
-            border: 1px solid rgba(212, 165, 116, 0.1);
+        .exercise::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--neon-blue);
         }
 
-        .form-group {
-            margin-bottom: 2rem;
+        .exercise h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--frost);
-            font-weight: 500;
-            text-transform: uppercase;
+        .exercise p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .code-section {
+            margin: 1.5rem 0;
+        }
+
+        .code-label {
+            display: inline-block;
+            background: var(--neon-blue);
+            color: var(--darker-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 5px 5px 0 0;
+            font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
+            font-weight: 700;
             letter-spacing: 1px;
         }
 
-        input, textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(10, 25, 47, 0.8);
-            border: 1px solid var(--steel);
-            color: var(--frost);
-            font-family: 'Work Sans', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+        pre {
+            background: rgba(5, 8, 22, 0.9);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 10px;
+            overflow-x: auto;
+            margin: 0;
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #00f3ff;
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 150px;
+        .output-section {
+            margin-top: 1rem;
         }
 
-        .file-upload {
-            border: 2px dashed var(--steel);
+        .output-label {
+            display: inline-block;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px 5px 0 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .output-box {
+            background: rgba(5, 8, 22, 0.9);
+            border: 1px solid rgba(191, 0, 255, 0.3);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 10px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            color: var(--neon-purple);
+        }
+
+        .text-content {
+            background: var(--card-bg);
             padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        .file-upload:hover {
-            border-color: var(--gold);
-            background: rgba(212, 165, 116, 0.05);
+        .text-content h3 {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .file-upload input {
-            display: none;
+        .text-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
         }
 
         /* Footer */
         footer {
-            background: var(--slate);
-            padding: 4rem 2rem;
-            border-top: 1px solid rgba(212, 165, 116, 0.1);
+            background: var(--darker-bg);
+            border-top: 1px solid var(--neon-blue);
+            padding: 3rem 2rem;
+            text-align: center;
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-text {
-            color: var(--silver);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--silver);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
+        footer p {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-muted);
+            letter-spacing: 2px;
         }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            nav ul {
-                gap: 1.5rem;
-            }
-
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+            nav ul {
+                gap: 1rem;
             }
 
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .form-container {
-                padding: 2rem;
+            .section-title {
+                font-size: 2rem;
             }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .exercise-card {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-
-    <nav>
+<nav>
         <div class="container">
-            <div class="logo">AAQ</div>
+            <a href="#home" class="logo">AAQ</a>
             <ul>
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#about">Sobre Mí</a></li>
@@ -759,263 +650,323 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-label">Ingeniería Estadística e Informática - Código: 247094</div>
-            <h1>Aldair Adriano<br>Quispe Ccoito</h1>
-            <p class="hero-subtitle">Construyendo soluciones elegantes a través del código. Especializándome en desarrollo de software y arquitectura de sistemas.</p>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">Ver Ejercicios</a>
-                <a href="#about" class="btn btn-secondary">Conocer Más</a>
+        <div class="container">
+            <div class="code-tag">Ingeniería Estadística e Informática - Código: 247094</div>
+            <h1>Aldair Adriano Quispe Ccoito</h1>
+            <p>Construyendo soluciones elegantes a través del código. Especializándome en desarrollo de software y arquitectura de sistemas.</p>
+            <div>
+                <a href="#projects" class="btn">Ver Ejercicios</a>
+                <a href="#about" class="btn">Conocer Más</a>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Líneas de Código</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70+</div>
+                    <div class="stat-label">Ejercicios Completados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Conceptos Dominados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Dedicación</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <span class="stat-number" data-target="5000">0</span>
-                <div class="stat-label">Líneas de Código</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="12">0</span>
-                <div class="stat-label">Proyectos Completados</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="8">0</span>
-                <div class="stat-label">Conceptos Dominados</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="100">0</span>
-                <div class="stat-label">% Dedicación</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="section-header fade-in">
-            <div class="section-label">Sobre Mí</div>
-            <h2 class="section-title">Lenguaje de Programación I</h2>
-        </div>
-        <div class="about-content">
-            <div class="about-text fade-in">
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mí</h2>
+            <div class="about-content">
+                <h2>Lenguaje de Programación I</h2>
                 <p>Introducción fundamental al mundo de la programación. Este curso proporciona las bases sólidas necesarias para comprender cómo funcionan los lenguajes de programación y cómo crear soluciones efectivas mediante código.</p>
                 <p>Desarrollo pensamiento lógico-computacional, dominio estructuras de datos fundamentales, implemento algoritmos eficientes y resuelvo problemas mediante programación estructurada y orientada a objetos.</p>
                 <p>Mi metodología se basa en aprendizaje práctico, resolución de problemas reales, code reviews colaborativos y desarrollo incremental de habilidades.</p>
-            </div>
-            <div class="skills-grid fade-in">
-                <div class="skill-item">
-                    <div class="skill-name">Algoritmos</div>
-                    <div class="skill-desc">Análisis y diseño de soluciones eficientes</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Estructuras</div>
-                    <div class="skill-desc">Arrays, listas, pilas y árboles</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Python & C++</div>
-                    <div class="skill-desc">Desarrollo multiplataforma</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Git/GitHub</div>
-                    <div class="skill-desc">Control de versiones colaborativo</div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">🧮</div>
+                        <h3>Algoritmos</h3>
+                        <p>Análisis y diseño de soluciones eficientes</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">📊</div>
+                        <h3>Estructuras</h3>
+                        <p>Arrays, listas, pilas y árboles</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">💻</div>
+                        <h3>C & C++</h3>
+                        <p>Desarrollo multiplataforma</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🔧</div>
+                        <h3>Git/GitHub</h3>
+                        <p>Control de versiones colaborativo</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="projects">
-        <div class="section-header fade-in">
-            <div class="section-label">Ejercicios del Curso</div>
-            <h2 class="section-title">Prácticas Semanales</h2>
-        </div>
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Ejercicios del Curso</h2>
 
-        <div class="tabs-container">
-            <div class="tabs-nav">
-                <button class="tab-btn active" onclick="switchTab('ejercicios')">Ejercicios por Semana</button>
-                <button class="tab-btn" onclick="switchTab('material')">Material Teórico</button>
-            </div>
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📘 Semana 1: Introducción a la Programación</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="exercise">
+                        <h4>📚 Lenguajes de Programación Más Usados</h4>
+                        <div class="text-content">
+                            <h3>¿Cómo se sabe cuáles son los lenguajes de programación más usados?</h3>
+                            <p>Para identificar cuáles son los lenguajes de programación más usados, no se toma solo la opinión de una persona, sino que se utilizan encuestas y estadísticas realizadas a programadores y estudiantes de diferentes partes del mundo. Estas encuestas se hacen de manera periódica y recopilan información sobre los lenguajes que se usan en estudios, trabajos y proyectos personales.</p>
+                            
+                            <p>Una de las encuestas más conocidas es la <strong>Stack Overflow Developer Survey</strong>, en la cual participan miles de personas, desde estudiantes hasta programadores profesionales. Gracias a la gran cantidad de participantes, los resultados permiten tener una idea clara sobre qué lenguajes son los más utilizados actualmente.</p>
+                            
+                            <p>Además, también se consideran otros factores como el uso de lenguajes en proyectos reales, su presencia en empresas y su demanda en el mercado laboral. Todo esto ayuda a determinar cuáles son los lenguajes de programación más usados.</p>
 
-            <!-- Ejercicios Tab -->
-            <div id="ejercicios-tab" class="tab-content active">
-                
-                <!-- SEMANA 1 -->
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📘 Semana 1: Introducción y Estructuras Básicas</h3>
-                        <span class="week-toggle">▼</span>
+                            <h3>Lenguajes de programación más usados según encuestas</h3>
+                            <p>De acuerdo con las encuestas y estadísticas más recientes, los lenguajes de programación que aparecen con mayor frecuencia como los más usados son los siguientes:</p>
+                            <ul>
+                                <li><strong>JavaScript</strong></li>
+                                <li><strong>Python</strong></li>
+                                <li><strong>SQL</strong></li>
+                                <li><strong>Java</strong></li>
+                                <li><strong>C</strong></li>
+                                <li><strong>C++</strong></li>
+                                <li><strong>C#</strong></li>
+                                <li><strong>TypeScript</strong></li>
+                            </ul>
+                            
+                            <p>Estos lenguajes destacan porque se utilizan en diferentes áreas de la informática, como desarrollo web, bases de datos, aplicaciones, sistemas y videojuegos.</p>
+
+                            <h3>¿Por qué estos lenguajes son los más usados?</h3>
+                            
+                            <p><strong>JavaScript</strong> es uno de los lenguajes más usados porque se emplea en casi todas las páginas web. Permite crear sitios interactivos y también se puede usar en el servidor, lo que lo hace muy versátil. Es fundamental para el desarrollo frontend moderno y con frameworks como React, Vue y Angular, su importancia ha crecido exponencialmente.</p>
+                            
+                            <p><strong>Python</strong> es muy popular debido a que es fácil de aprender y entender. Se usa tanto para empezar en programación como en áreas más avanzadas, como análisis de datos, inteligencia artificial y automatización de tareas. Su sintaxis clara y la gran cantidad de bibliotecas disponibles lo hacen ideal para científicos de datos, investigadores y desarrolladores web.</p>
+                            
+                            <p><strong>SQL</strong> aparece en casi todas las estadísticas porque es fundamental para trabajar con bases de datos. La mayoría de aplicaciones necesita guardar y consultar información, por lo que su uso es muy frecuente. Dominar SQL es esencial para cualquier desarrollador que trabaje con datos.</p>
+                            
+                            <p><strong>Java</strong> sigue siendo importante porque se utiliza en aplicaciones grandes y sistemas empresariales. También es muy conocido por su uso en aplicaciones móviles Android. Su filosofía "Write Once, Run Anywhere" lo ha mantenido relevante durante décadas.</p>
+                            
+                            <p><strong>C y C++</strong> son lenguajes que permiten trabajar más cerca del funcionamiento interno de la computadora. Se usan en sistemas operativos, videojuegos y programas que necesitan alto rendimiento. Son fundamentales en la programación de bajo nivel y sistemas embebidos.</p>
+                            
+                            <p><strong>C#</strong> es muy utilizado para aplicaciones de escritorio y desarrollo de videojuegos, especialmente en el entorno de Microsoft y con el motor Unity. Es un lenguaje moderno y versátil que combina características de varios lenguajes.</p>
+                            
+                            <p><strong>TypeScript</strong> es una extensión de JavaScript que ayuda a reducir errores en programas grandes, por lo que su uso ha aumentado en los últimos años. Añade tipado estático opcional a JavaScript, lo que mejora la mantenibilidad del código en proyectos grandes.</p>
+
+                            <h3>Importancia de conocer los lenguajes más usados</h3>
+                            <p>Conocer los lenguajes de programación más usados es importante porque permite entender las tendencias actuales en la tecnología. Estos lenguajes no solo son populares, sino que tienen aplicaciones reales en distintos tipos de proyectos.</p>
+                            
+                            <p>Además, aprender estos lenguajes ayuda a desarrollar la lógica de programación y a tener una base sólida para seguir aprendiendo otros lenguajes en el futuro. El mercado laboral valora especialmente a los programadores que dominan estos lenguajes populares.</p>
+
+                            <h3>Conclusión</h3>
+                            <p>Los lenguajes de programación más usados se determinan a partir de encuestas y estadísticas reales realizadas a programadores y estudiantes. Lenguajes como JavaScript y Python lideran por su facilidad de uso y su amplia aplicación, mientras que otros como C, C++ y Java siguen siendo importantes por su uso en sistemas y aplicaciones más complejas.</p>
+                            
+                            <p>Esto demuestra que la popularidad de un lenguaje está relacionada con su utilidad y demanda en el mundo real. Conocer estos lenguajes abre puertas en el campo laboral y proporciona las herramientas necesarias para desarrollar soluciones tecnológicas modernas.</p>
+
+                            <h3>Referencias</h3>
+                            <ul>
+                                <li>Stack Overflow. (2025). Stack Overflow Developer Survey. https://survey.stackoverflow.co</li>
+                                <li>Statista. (2024). Most used programming languages worldwide. https://www.statista.com</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
+                    <div class="exercise">
+                        <h4>💾 Tipos de Datos en C</h4>
+                        <p>Programa que demuestra el uso de diferentes tipos de datos en C.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+stdbool.h&gt;
+int main()  {
+    int entero;
+    float decimal;
+    double decimalGrande;
+    char caracter;
+    char texto[50];
+    bool estado;
+    printf("Ingrese un numero entero: ");
+    scanf("%d", &entero);
+    printf("Ingrese un numero decimal (float): ");
+    scanf("%f", &decimal);
+    printf("Ingrese un numero decimal grande (double): ");
+    scanf("%lf", &decimalGrande);
+    printf("Ingrese un caracter: ");
+    scanf(" %c", &caracter);
+    printf("Ingrese un texto: ");
+    scanf("%s", texto);
+    printf("Ingrese un valor logico (1 = true, 0 = false): ");
+    scanf("%d", &estado);
+    printf("\n--- DATOS INGRESADOS ---\n");
+    printf("Entero: %d\n", entero);
+    printf("Float: %.2f\n", decimal);
+    printf("Double: %.4lf\n", decimalGrande);
+    printf("Caracter: %c\n", caracter);
+    printf("Texto: %s\n", texto);
+    printf("Booleano: %d\n", estado);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese un numero entero: 42
+Ingrese un numero decimal (float): 3.14
+Ingrese un numero decimal grande (double): 2.718281828
+Ingrese un caracter: A
+Ingrese un texto: Hola
+Ingrese un valor logico (1 = true, 0 = false): 1
+
+--- DATOS INGRESADOS ---
+Entero: 42
+Float: 3.14
+Double: 2.7183
+Caracter: A
+Texto: Hola
+Booleano: 1</div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- SEMANA 2 -->
-                <div class="week-section open">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📗 Semana 2: Estructuras de Control en C/C++</h3>
-                        <span class="week-toggle">▼</span>
-                    </div>
-                    <div class="week-content">
-                        
-                        <!-- Ejercicio 1 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 1</span>
-                                <h4>Suma de Números Pares</h4>
-                            </div>
-                            <p class="exercise-desc">Calcular la suma de todos los números pares desde 1 hasta N.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+            <!-- SEMANA 2 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📗 Semana 2: Estructuras de Control en C/C++</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content active">
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1: Suma de Números Pares</h4>
+                        <p>Calcular la suma de todos los números pares desde 1 hasta N.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int n, suma = 0;
     printf("Ingrese N: ");
     scanf("%d", &n);
-    
-    for (int i = 2; i <= n; i += 2) {
-        suma += i;
-    }
-    
+    for (int i = 2;
+    i <= n;
+    i += 2) suma += i;
     printf("Suma: %d\n", suma);
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (N = 10)</div>
-                                <pre>Ingrese N: 10
-Suma: 30</pre>
-                            </div>
                         </div>
-
-                        <!-- Ejercicio 2 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 2</span>
-                                <h4>Conversión de Calificación</h4>
-                            </div>
-                            <p class="exercise-desc">Convertir una nota numérica (0-20) a calificación literal (A, B, C, D, F).</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese N: 10
+Suma: 30</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 2: Conversión de Calificación</h4>
+                        <p>Convertir una nota numérica (0-20) a calificación literal.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int nota;
     printf("Ingrese la nota (0-20): ");
     scanf("%d", &nota);
-    
-    if (nota < 0 || nota > 20) {
-        printf("Error: Nota fuera de rango\n");
-    } else if (nota >= 18) {
-        printf("A - Excelente\n");
-    } else if (nota >= 15) {
-        printf("B - Muy Bueno\n");
-    } else if (nota >= 11) {
-        printf("C - Bueno\n");
-    } else if (nota >= 8) {
-        printf("D - Regular\n");
-    } else {
-        printf("F - Desaprobado\n");
-    }
+    if (nota < 0 || nota > 20) printf("Error: Nota fuera de rango\n");
+    else if (nota >= 18) printf("A - Excelente\n");
+    else if (nota >= 15) printf("B - Muy Bueno\n");
+    else if (nota >= 11) printf("C - Bueno\n");
+    else if (nota >= 8) printf("D - Regular\n");
+    else printf("F - Desaprobado\n");
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (nota = 16)</div>
-                                <pre>Ingrese la nota (0-20): 16
-B - Muy Bueno</pre>
-                            </div>
                         </div>
-
-                        <!-- Ejercicio 3 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 3</span>
-                                <h4>Número Inverso</h4>
-                            </div>
-                            <p class="exercise-desc">Invertir los dígitos de un número entero positivo.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese la nota (0-20): 16
+B - Muy Bueno</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 3: Número Inverso</h4>
+                        <p>Invertir los dígitos de un número entero positivo.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int n, original, inverso = 0;
-    
     printf("Ingrese numero: ");
     scanf("%d", &n);
     original = n;
-    
-    while (n > 0) {
+    while (n > 0)  {
         int digito = n % 10;
         inverso = inverso * 10 + digito;
         n = n / 10;
-    }
-    
-    printf("Original: %d\n", original);
+    } printf("Original: %d\n", original);
     printf("Inverso: %d\n", inverso);
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (n = 4831)</div>
-                                <pre>Ingrese numero: 4831
-Original: 4831
-Inverso: 1384</pre>
-                            </div>
                         </div>
-
-                        <!-- Ejercicio 4 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 4</span>
-                                <h4>Menú de Operaciones - Calculadora</h4>
-                            </div>
-                            <p class="exercise-desc">Implementar una calculadora con menú interactivo que realice operaciones básicas.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese numero: 4831
+Original: 4831
+Inverso: 1384</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 4: Calculadora con Menú</h4>
+                        <p>Implementar una calculadora con menú interactivo.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int opcion;
     float a, b;
-    
-    do {
+    do  {
         printf("\n====== CALCULADORA ======\n");
-        printf("1. Suma\n");
-        printf("2. Resta\n");
-        printf("3. Multiplicacion\n");
-        printf("4. Division\n");
-        printf("0. Salir\n");
+        printf("1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n0. Salir\n");
         printf("Opcion: ");
         scanf("%d", &opcion);
-        
-        if (opcion >= 1 && opcion <= 4) {
-            printf("Numero 1: "); scanf("%f", &a);
-            printf("Numero 2: "); scanf("%f", &b);
-        }
-        
-        switch(opcion) {
-            case 1: printf("Resultado: %.2f\n", a + b); break;
-            case 2: printf("Resultado: %.2f\n", a - b); break;
-            case 3: printf("Resultado: %.2f\n", a * b); break;
-            case 4: 
-                if (b == 0) printf("Error: Division por cero!\n");
-                else printf("Resultado: %.2f\n", a / b);
-                break;
-            case 0: printf("Saliendo...\n"); break;
+        if (opcion >= 1 && opcion <= 4)  {
+            printf("Numero 1: ");
+            scanf("%f", &a);
+            printf("Numero 2: ");
+            scanf("%f", &b);
+        } switch(opcion)  {
+            case 1: printf("Resultado: %.2f\n", a + b);
+            break;
+            case 2: printf("Resultado: %.2f\n", a - b);
+            break;
+            case 3: printf("Resultado: %.2f\n", a * b);
+            break;
+            case 4: if (b == 0) printf("Error: Division por cero!\n");
+            else printf("Resultado: %.2f\n", a / b);
+            break;
+            case 0: printf("Saliendo...\n");
+            break;
             default: printf("Opcion no valida!\n");
         }
     } while (opcion != 0);
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa</div>
-                                <pre>====== CALCULADORA ======
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">====== CALCULADORA ======
 1. Suma
 2. Resta
 3. Multiplicacion
@@ -1024,186 +975,145 @@ int main() {
 Opcion: 1
 Numero 1: 15
 Numero 2: 7
-Resultado: 22.00</pre>
-                            </div>
+Resultado: 22.00</div>
                         </div>
-
-                        <!-- Ejercicio 5 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 5</span>
-                                <h4>Patrón de Asteriscos - Triángulo Ascendente</h4>
-                            </div>
-                            <p class="exercise-desc">Generar un patrón triangular de asteriscos utilizando bucles anidados.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 5: Patrón de Asteriscos - Triángulo</h4>
+                        <p>Generar un patrón triangular de asteriscos.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int n;
     printf("Ingrese N: ");
     scanf("%d", &n);
-    
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= i; j++) {
-            printf("*");
-        }
+    for (int i = 1;
+    i <= n;
+    i++)  {
+        for (int j = 1;
+        j <= i;
+        j++) printf("*");
         printf("\n");
-    }
-    return 0;
+    } return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (N = 5)</div>
-                                <pre>Ingrese N: 5
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese N: 5
 *
 **
 ***
 ****
-*****</pre>
-                            </div>
+*****</div>
                         </div>
-
-                        <!-- Ejercicio 6 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 6</span>
-                                <h4>Número Perfecto</h4>
-                            </div>
-                            <p class="exercise-desc">Determinar si un número es perfecto (igual a la suma de sus divisores propios, excluyendo el mismo número).</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 6: Número Perfecto</h4>
+                        <p>Determinar si un número es perfecto (suma de divisores propios).</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int n, suma = 0;
     printf("Ingrese un numero: ");
     scanf("%d", &n);
-    
-    if (n <= 1) {
+    if (n <= 1)  {
         printf("El numero debe ser mayor que 1\n");
         return 0;
-    }
-    
-    printf("Divisores de %d: ", n);
-    for (int i = 1; i < n; i++) {
-        if (n % i == 0) {
+    } printf("Divisores de %d: ", n);
+    for (int i = 1;
+    i < n;
+    i++)  {
+        if (n % i == 0)  {
             printf("%d ", i);
             suma += i;
         }
-    }
-    
-    printf("\nSuma de divisores: %d\n", suma);
-    if (suma == n)
-        printf("%d ES un numero perfecto\n", n);
-    else
-        printf("%d NO es un numero perfecto\n", n);
-    
+    } printf("\nSuma de divisores: %d\n", suma);
+    if (suma == n) printf("%d ES un numero perfecto\n", n);
+    else printf("%d NO es un numero perfecto\n", n);
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (n = 28)</div>
-                                <pre>Ingrese un numero: 28
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese un numero: 28
 Divisores de 28: 1 2 4 7 14 
 Suma de divisores: 28
-28 ES un numero perfecto</pre>
-                            </div>
+28 ES un numero perfecto</div>
                         </div>
-
-                        <!-- Ejercicio 7 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 7</span>
-                                <h4>Serie de Fibonacci</h4>
-                            </div>
-                            <p class="exercise-desc">Generar los primeros N términos de la serie de Fibonacci donde cada número es la suma de los dos anteriores.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-int main() {
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 7: Serie de Fibonacci</h4>
+                        <p>Generar los primeros N términos de Fibonacci.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
     int n, a = 0, b = 1, siguiente;
     printf("Ingrese cantidad de terminos: ");
     scanf("%d", &n);
-    
     printf("Serie Fibonacci: ");
-    
-    for (int i = 0; i < n; i++) {
-        if (i == 0) {
-            printf("%d ", a);
-        } else if (i == 1) {
-            printf("%d ", b);
-        } else {
+    for (int i = 0;
+    i < n;
+    i++)  {
+        if (i == 0) printf("%d ", a);
+        else if (i == 1) printf("%d ", b);
+        else  {
             siguiente = a + b;
             printf("%d ", siguiente);
             a = b;
             b = siguiente;
         }
-    }
-    printf("\n");
+    } printf("\n");
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa (N = 10)</div>
-                                <pre>Ingrese cantidad de terminos: 10
-Serie Fibonacci: 0 1 1 2 3 5 8 13 21 34</pre>
-                            </div>
                         </div>
-
-                        <!-- Ejercicio 8 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 8</span>
-                                <h4>Validador de Contraseña</h4>
-                            </div>
-                            <p class="exercise-desc">Validar si una contraseña cumple con criterios de seguridad: mínimo 8 caracteres, mayúscula, minúscula, dígito y carácter especial.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-int main() {
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese cantidad de terminos: 10
+Serie Fibonacci: 0 1 1 2 3 5 8 13 21 34</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 8: Validador de Contraseña</h4>
+                        <p>Validar criterios de seguridad de contraseña.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+string.h&gt;
+int main()  {
     char pass[100];
     int long_ok = 0, mayus = 0, minus = 0, digito = 0, especial = 0;
-    
     printf("Ingrese contrasena: ");
     scanf("%s", pass);
-    
     if (strlen(pass) >= 8) long_ok = 1;
-    
-    for (int i = 0; i < strlen(pass); i++) {
+    for (int i = 0;
+    i < strlen(pass);
+    i++)  {
         if (pass[i] >= 'A' && pass[i] <= 'Z') mayus = 1;
         else if (pass[i] >= 'a' && pass[i] <= 'z') minus = 1;
         else if (pass[i] >= '0' && pass[i] <= '9') digito = 1;
-        else if (pass[i]=='!' || pass[i]=='@' || pass[i]=='#' || 
-                 pass[i]=='$' || pass[i]=='%') especial = 1;
-    }
-    
-    printf("\nValidacion:\n");
+        else if (pass[i]=='!' || pass[i]=='@' || pass[i]=='#' || pass[i]=='$' || pass[i]=='%') especial = 1;
+    } printf("\nValidacion:\n");
     printf("Longitud >= 8: %s\n", long_ok ? "SI" : "NO");
     printf("Mayuscula: %s\n", mayus ? "SI" : "NO");
     printf("Minuscula: %s\n", minus ? "SI" : "NO");
     printf("Digito: %s\n", digito ? "SI" : "NO");
     printf("Caracter especial: %s\n", especial ? "SI" : "NO");
-    
-    if (long_ok && mayus && minus && digito && especial)
-        printf("\nContrasena VALIDA\n");
-    else
-        printf("\nContrasena INVALIDA\n");
-    
+    if (long_ok && mayus && minus && digito && especial) printf("\nContrasena VALIDA\n");
+    else printf("\nContrasena INVALIDA\n");
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa</div>
-                                <pre>Ingrese contrasena: Hola123!
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Ingrese contrasena: Hola123!
 
 Validacion:
 Longitud >= 8: SI
@@ -1212,131 +1122,99 @@ Minuscula: SI
 Digito: SI
 Caracter especial: SI
 
-Contrasena VALIDA</pre>
-                            </div>
+Contrasena VALIDA</div>
                         </div>
-
-                        <!-- Ejercicio 9 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 9</span>
-                                <h4>Conversión de Bases Numéricas</h4>
-                            </div>
-                            <p class="exercise-desc">Convertir un número decimal a otras bases: binario (base 2), octal (base 8) o hexadecimal (base 16).</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-
-void convertir(int num, int base) {
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 9: Conversión de Bases Numéricas</h4>
+                        <p>Convertir decimal a binario, octal o hexadecimal.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+void convertir(int num, int base)  {
     int digitos[100], i = 0;
     char hex[] = "0123456789ABCDEF";
-    
-    if (num == 0) {
+    if (num == 0)  {
         printf("0\n");
         return;
-    }
-    
-    while (num > 0) {
+    } while (num > 0)  {
         digitos[i++] = num % base;
         num /= base;
-    }
-    
-    printf("Resultado: ");
-    for (int j = i - 1; j >= 0; j--) {
-        if (base == 16)
-            printf("%c", hex[digitos[j]]);
-        else
-            printf("%d", digitos[j]);
-    }
-    printf("\n");
+    } printf("Resultado: ");
+    for (int j = i - 1;
+    j >= 0;
+    j--)  {
+        if (base == 16) printf("%c", hex[digitos[j]]);
+        else printf("%d", digitos[j]);
+    } printf("\n");
 }
-
-int main() {
+int main()  {
     int opcion, num;
-    
-    do {
+    do  {
         printf("\n=== CONVERSION DE BASES ===\n");
-        printf("1. Decimal a Binario\n");
-        printf("2. Decimal a Octal\n");
-        printf("3. Decimal a Hexadecimal\n");
-        printf("0. Salir\n");
+        printf("1. Decimal a Binario\n2. Decimal a Octal\n3. Decimal a Hexadecimal\n0. Salir\n");
         printf("Opcion: ");
         scanf("%d", &opcion);
-        
-        if (opcion >= 1 && opcion <= 3) {
+        if (opcion >= 1 && opcion <= 3)  {
             printf("Ingrese numero decimal: ");
             scanf("%d", &num);
-            
-            switch(opcion) {
-                case 1: convertir(num, 2); break;
-                case 2: convertir(num, 8); break;
-                case 3: convertir(num, 16); break;
+            switch(opcion)  {
+                case 1: convertir(num, 2);
+                break;
+                case 2: convertir(num, 8);
+                break;
+                case 3: convertir(num, 16);
+                break;
             }
         }
     } while (opcion != 0);
-    
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa</div>
-                                <pre>=== CONVERSION DE BASES ===
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">=== CONVERSION DE BASES ===
 1. Decimal a Binario
 2. Decimal a Octal
 3. Decimal a Hexadecimal
 0. Salir
 Opcion: 1
 Ingrese numero decimal: 25
-Resultado: 11001</pre>
-                            </div>
+Resultado: 11001</div>
                         </div>
-
-                        <!-- Ejercicio 10 -->
-                        <div class="exercise-card">
-                            <div class="exercise-header">
-                                <span class="exercise-number">Ejercicio 10</span>
-                                <h4>Juego de Adivinanza</h4>
-                            </div>
-                            <p class="exercise-desc">Crear un juego donde la computadora genera un número aleatorio entre 1 y 100, y el usuario debe adivinarlo con pistas.</p>
-                            
-                            <div class="code-block">
-                                <div class="code-header">💻 Código en C</div>
-                                <pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;time.h&gt;
-
-int main() {
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 10: Juego de Adivinanza</h4>
+                        <p>Adivinar un número aleatorio entre 1 y 100.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+stdlib.h&gt;
+#include &lt;
+time.h&gt;
+int main()  {
     int numero, intento, intentos = 0;
-    
     srand(time(0));
     numero = rand() % 100 + 1;
-    
     printf("=== JUEGO DE ADIVINANZA ===\n");
     printf("Adivina el numero entre 1 y 100\n\n");
-    
-    do {
+    do  {
         intentos++;
         printf("Intento %d: ", intentos);
         scanf("%d", &intento);
-        
-        if (intento < numero)
-            printf("-> El numero es MAYOR\n");
-        else if (intento > numero)
-            printf("-> El numero es MENOR\n");
-        else
-            printf("-> FELICIDADES! Adivinaste en %d intentos\n", intentos);
-            
+        if (intento < numero) printf("-> El numero es MAYOR\n");
+        else if (intento > numero) printf("-> El numero es MENOR\n");
+        else printf("-> FELICIDADES! Adivinaste en %d intentos\n", intentos);
     } while (intento != numero);
-    
     return 0;
 }</code></pre>
-                            </div>
-                            
-                            <div class="output-block">
-                                <div class="output-header">📤 Salida del Programa</div>
-                                <pre>=== JUEGO DE ADIVINANZA ===
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">=== JUEGO DE ADIVINANZA ===
 Adivina el numero entre 1 y 100
 
 Intento 1: 50
@@ -1346,213 +1224,1082 @@ Intento 2: 75
 Intento 3: 62
 -> El numero es MAYOR
 Intento 4: 68
--> FELICIDADES! Adivinaste en 4 intentos</pre>
-                            </div>
+-> FELICIDADES! Adivinaste en 4 intentos</div>
                         </div>
-
                     </div>
-                </div>
-
-                <!-- SEMANAS 3-7 -->
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📕 Semana 3: Funciones y Modularización</h3>
-                        <span class="week-toggle">▼</span>
+                    <div class="exercise">
+                        <h4>Ejercicio 11: Conversión de Tipos de Datos</h4>
+                        <p>Demostración de conversión implícita y explícita en C++.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código</div>
+                            <pre><code>#include &lt;
+iostream&gt;
+using namespace std;
+int main()  {
+    char c = 10;
+    short s = 4;
+    int i = 3;
+    long l = 20;
+    unsigned u = 5;
+    unsigned long ul = 6;
+    float f = 1.23f;
+    double d = 0.0;
+    long double ld = 2.5;
+    int r1 = (c - s) / i;
+    double r2 = u * 2.0 - i;
+    long double r3 = ld + c;
+    long r4 = 2 * l / 1;
+    unsigned r5 = u * 7 - i;
+    unsigned long r6 = 7 * s * ul;
+    int r7 = c + 3;
+    d = i;
+    cout << "r1 = " << r1 << endl;
+    cout << "r2 = " << r2 << endl;
+    cout << "r3 = " << r3 << endl;
+    cout << "r4 = " << r4 << endl;
+    cout << "r5 = " << r5 << endl;
+    cout << "r6 = " << r6 << endl;
+    cout << "r7 = " << r7 << endl;
+    cout << "d = " << d << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">r1 = 2
+r2 = 7
+r3 = 12.5
+r4 = 40
+r5 = 32
+r6 = 168
+r7 = 13
+d = 3</div>
+                        </div>
                     </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
-                    </div>
-                </div>
-
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📙 Semana 4: Arreglos y Matrices</h3>
-                        <span class="week-toggle">▼</span>
-                    </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
-                    </div>
-                </div>
-
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📔 Semana 5: Punteros y Referencias</h3>
-                        <span class="week-toggle">▼</span>
-                    </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
-                    </div>
-                </div>
-
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📓 Semana 6: Estructuras de Datos</h3>
-                        <span class="week-toggle">▼</span>
-                    </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
-                    </div>
-                </div>
-
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <h3>📚 Semana 7: Archivos y Persistencia</h3>
-                        <span class="week-toggle">▼</span>
-                    </div>
-                    <div class="week-content">
-                        <p class="week-desc">⏳ Pendiente de carga...</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Material Tab -->
-            <div id="material-tab" class="tab-content">
-                <div class="week-desc" style="padding: 4rem;">
-                    📚 Material teórico disponible próximamente...
                 </div>
             </div>
 
+
+            <!-- SEMANA 3 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📕 Semana 3: Funciones y Programación Modular</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1: Cálculo de Media Aritmética</h4>
+                        <p>Calcular la media aritmética de un conjunto de datos.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    float datos[] =  {
+        23.5, 45.2, 33.8, 29.1
+    };
+    float suma = 0;
+    for(int i = 0;
+    i < 4;
+    i++) suma += datos[i];
+    printf("Media: %.2f\n", suma/4);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+float calcularMedia(float datos[], int n)  {
+    float suma = 0;
+    for(int i = 0;
+    i < n;
+    i++) suma += datos[i];
+    return suma / n;
+}
+int main()  {
+    float datos[] =  {
+        23.5, 45.2, 33.8, 29.1
+    };
+    printf("Media: %.2f\n", calcularMedia(datos, 4));
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Media: 32.90</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 2: Normalización de Valores</h4>
+                        <p>Normalizar un valor entre un rango mínimo y máximo.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    float x = 75, min = 20, max = 100;
+    float normalizado = (x - min) / (max - min);
+    printf("Valor normalizado: %.3f\n", normalizado);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+float normalizar(float x, float min, float max)  {
+    return (x - min) / (max - min);
+}
+int main()  {
+    float x = 75, min = 20, max = 100;
+    printf("Valor normalizado: %.3f\n", normalizar(x, min, max));
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Valor normalizado: 0.688</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 3: Clasificación de Temperatura</h4>
+                        <p>Clasificar temperatura en frío, templado o caliente.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    float temp = 18.5;
+    if(temp < 10) printf("Frio\n");
+    else if(temp < 25) printf("Templado\n");
+    else printf("Caliente\n");
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+void clasificarTemperatura(float temp)  {
+    if(temp < 10) printf("Frio\n");
+    else if(temp < 25) printf("Templado\n");
+    else printf("Caliente\n");
+}
+int main()  {
+    clasificarTemperatura(18.5);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Templado</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 4: Detección de Outliers (Z-Score)</h4>
+                        <p>Detectar valores atípicos usando puntaje Z.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    float valor = 95, media = 50, desv = 15;
+    float z_score = (valor - media) / desv;
+    if(z_score > 3 || z_score < -3) printf("Outlier detectado\n");
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+float calcularZScore(float valor, float media, float desv)  {
+    return (valor - media) / desv;
+} int esOutlier(float z_score)  {
+    return (z_score > 3 || z_score < -3);
+}
+int main()  {
+    float z = calcularZScore(95, 50, 15);
+    if(esOutlier(z)) printf("Outlier detectado\n");
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Outlier detectado</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 5: Validación de Datos</h4>
+                        <p>Validar que edad y peso sean valores razonables.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    int edad = 150;
+    float peso = -5.5;
+    if(edad < 0 || edad > 120 || peso <= 0) printf("Datos invalidos\n");
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int validarDatos(int edad, float peso)  {
+    return !(edad < 0 || edad > 120 || peso <= 0);
+}
+int main()  {
+    if(!validarDatos(150, -5.5)) printf("Datos invalidos\n");
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Datos invalidos</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 6: Ventas Acumuladas</h4>
+                        <p>Calcular acumulado de ventas día por día.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    int ventas[] =  {
+        100, 150, 200, 180, 220
+    };
+    int acum = 0;
+    for(int i = 0;
+    i < 5;
+    i++)  {
+        acum += ventas[i];
+        printf("Dia %d: Total = %d\n", i+1, acum);
+    } return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+void mostrarVentasAcumuladas(int ventas[], int n)  {
+    int acum = 0;
+    for(int i = 0;
+    i < n;
+    i++)  {
+        acum += ventas[i];
+        printf("Dia %d: Total = %d\n", i+1, acum);
+    }
+}
+int main()  {
+    int ventas[] =  {
+        100, 150, 200, 180, 220
+    };
+    mostrarVentasAcumuladas(ventas, 5);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Dia 1: Total = 100
+Dia 2: Total = 250
+Dia 3: Total = 450
+Dia 4: Total = 630
+Dia 5: Total = 850</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 7: Matriz de Correlación</h4>
+                        <p>Mostrar matriz de correlación entre variables.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    float corr[3][3] =  {
+        {
+            1.0, 0.8, 0.6
+        },  {
+            0.8, 1.0, 0.5
+        },  {
+            0.6, 0.5, 1.0
+        }
+    };
+    for(int i = 0;
+    i < 3;
+    i++)
+    for(int j = 0;
+    j < 3;
+    j++) printf("r[%d][%d]=%.1f ", i, j, corr[i][j]);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+void mostrarMatrizCorrelacion(float corr[][3], int n)  {
+    for(int i = 0;
+    i < n;
+    i++)
+    for(int j = 0;
+    j < n;
+    j++) printf("r[%d][%d]=%.1f ", i, j, corr[i][j]);
+}
+int main()  {
+    float corr[3][3] =  {
+        {
+            1.0, 0.8, 0.6
+        },  {
+            0.8, 1.0, 0.5
+        },  {
+            0.6, 0.5, 1.0
+        }
+    };
+    mostrarMatrizCorrelacion(corr, 3);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">r[0][0]=1.0 r[0][1]=0.8 r[0][2]=0.6 r[1][0]=0.8 r[1][1]=1.0 r[1][2]=0.5 r[2][0]=0.6 r[2][1]=0.5 r[2][2]=1.0</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 8: Conteo de Categorías</h4>
+                        <p>Contar ocurrencias de una categoría específica.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    char tipos[] =  {
+        'A', 'B', 'A', 'C', 'A', 'B'
+    };
+    int contA = 0;
+    for(int i = 0;
+    i < 6;
+    i++)
+    if(tipos[i] == 'A') contA++;
+    printf("Categoria A: %d veces\n", contA);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int contarCategoria(char tipos[], int n, char cat)  {
+    int contador = 0;
+    for(int i = 0;
+    i < n;
+    i++)
+    if(tipos[i] == cat) contador++;
+    return contador;
+}
+int main()  {
+    char tipos[] =  {
+        'A', 'B', 'A', 'C', 'A', 'B'
+    };
+    printf("Categoria A: %d veces\n", contarCategoria(tipos, 6, 'A'));
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Categoria A: 3 veces</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 9: Búsqueda Lineal de ID</h4>
+                        <p>Buscar un ID específico en un arreglo.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int main()  {
+    int ids[] =  {
+        101, 203, 305, 407, 509
+    };
+    int buscar = 305, i = 0;
+    while(i < 5 && ids[i] != buscar) i++;
+    if(i < 5) printf("Encontrado en posicion %d\n", i);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+int buscarID(int ids[], int n, int buscar)  {
+    for(int i = 0;
+    i < n;
+    i++)
+    if(ids[i] == buscar) return i;
+    return -1;
+}
+int main()  {
+    int ids[] =  {
+        101, 203, 305, 407, 509
+    };
+    int pos = buscarID(ids, 5, 305);
+    if(pos != -1) printf("Encontrado en posicion %d\n", pos);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Encontrado en posicion 2</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <h4>Ejercicio 10: Raíz Cuadrada (Newton-Raphson)</h4>
+                        <p>Calcular raíz cuadrada usando método iterativo.</p>
+                        <div class="code-section">
+                            <div class="code-label">💻 Código Original en C</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+math.h&gt;
+int main()  {
+    float x = 10, tol = 0.01, x_nuevo;
+    while(fabs(x - 5) > tol)  {
+        x_nuevo = (x + 5/x) / 2;
+        x = x_nuevo;
+    } printf("Raiz: %.3f\n", x);
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-label">🔧 Código Convertido a Función</div>
+                            <pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+math.h&gt;
+float calcularRaiz(float numero, float tol)  {
+    float x = numero;
+    while(fabs(x - numero/x) > tol) x = (x + numero/x) / 2;
+    return x;
+}
+int main()  {
+    printf("Raiz: %.3f\n", calcularRaiz(25, 0.01));
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="output-section">
+                            <div class="output-label">📤 Salida del Programa</div>
+                            <div class="output-box">Raiz: 5.000</div>
+                        </div>
+                    </div><div class="exercise"><h4>Ejercicio 11: Codificación de Nivel</h4><p>Asignar códigos a niveles categóricos.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    char n='B';
+    switch(n) {
+        case 'A':printf("Codigo:1\n");
+        break;
+        case 'B':printf("Codigo:2\n");
+        break;
+        case 'C':printf("Codigo:3\n");
+        break;
+    } return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+int codificar( char n) {
+    switch(n) {
+        case 'A':return 1;
+        case 'B':return 2;
+        case 'C':return 3;
+        default:return 0;
+    }
+}
+int main() {
+    printf("Codigo:%d\n",codificar('B'));
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Codigo: 2</div></div></div><div class="exercise"><h4>Ejercicio 12: Selección de Modelo ML</h4><p>Seleccionar modelo según código.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int m=2;
+    switch(m) {
+        case 1:printf("Regresion Lineal\n");
+        break;
+        case 2:printf("Random Forest\n");
+        break;
+        case 3:printf("SVM\n");
+        break;
+    } return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void seleccionarModelo(int m) {
+    switch(m) {
+        case 1:printf("Regresion Lineal\n");
+        break;
+        case 2:printf("Random Forest\n");
+        break;
+        case 3:printf("SVM\n");
+        break;
+    }
+}
+int main() {
+    seleccionarModelo(2);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Random Forest</div></div></div><div class="exercise"><h4>Ejercicio 13: Filtrado de Precios</h4><p>Mostrar precios mayores a umbral.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float p[]= {
+        45.5,67.8,34.2,89.1,23.7
+    } ;
+    for(int i=0;
+    i<5;
+    i++)
+    if(p[i]>50)printf("%.1f ",p[i]);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void filtrarPrecios( float p[],int n, float u) {
+    for(int i=0;
+    i<n;
+    i++)
+    if(p[i]>u)printf("%.1f ",p[i]);
+}
+int main() {
+    float p[]= {
+        45.5,67.8,34.2,89.1,23.7
+    } ;
+    filtrarPrecios(p,5,50);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">67.8 89.1</div></div></div><div class="exercise"><h4>Ejercicio 14: Comparación RMSE</h4><p>Seleccionar mejor modelo por RMSE.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float r1=2.5,r2=3.1;
+    printf("Mejor: %s\n",r1<r2?"Modelo 1":"Modelo 2");
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+int mejorModelo( float r1, float r2) {
+    return r1<r2?1:2;
+}
+int main() {
+    printf("Mejor: Modelo %d\n",mejorModelo(2.5,3.1));
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Mejor: Modelo 1</div></div></div><div class="exercise"><h4>Ejercicio 15: Elegibilidad de Crédito</h4><p>Validar elegibilidad según edad e ingreso.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int e=25;
+    float i=35000;
+    if(e>=18&&e<=65&&i>30000)printf("Elegible\n");
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+int esElegible(int e, float i) {
+    return(e>=18&&e<=65&&i>30000);
+}
+int main() {
+    if(esElegible(25,35000))printf("Elegible\n");
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Elegible</div></div></div><div class="exercise"><h4>Ejercicio 16: Condiciones Aceptables</h4><p>Validar condiciones de pH y temperatura.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float ph=7.2,t=22;
+    if((ph>=6.5&&ph<=7.5)||t<25)printf("Aceptable\n");
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+int condicionesAceptables( float ph, float t) {
+    return((ph>=6.5&&ph<=7.5)||t<25);
+}
+int main() {
+    if(condicionesAceptables(7.2,22))printf("Aceptable\n");
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Aceptable</div></div></div><div class="exercise"><h4>Ejercicio 17: Precisión de Predicción</h4><p>Calcular accuracy de predicciones.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int p=0,c=0;
+    int pr[]= {
+        1,0,1,1,0
+    } ,re[]= {
+        1,0,0,1,0
+    } ;
+    for(int i=0;
+    i<5;
+    i++)pr[i]==re[i]?c++:p++;
+    printf("Accuracy:%.1f%%\n",(c*100.0)/5);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+float calcularAccuracy(int pr[],int re[],int n) {
+    int c=0;
+    for(int i=0;
+    i<n;
+    i++)
+    if(pr[i]==re[i])c++;
+    return(c*100.0)/n;
+}
+int main() {
+    int pr[]= {
+        1,0,1,1,0
+    } ,re[]= {
+        1,0,0,1,0
+    } ;
+    printf("Accuracy:%.1f%%\n",calcularAccuracy(pr,re,5));
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Accuracy: 80.0%</div></div></div><div class="exercise"><h4>Ejercicio 18: Muestra Aleatoria</h4><p>Generar muestra aleatoria.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+stdlib.h&gt;
+int main() {
+    int m[5],i=0;
+    do {
+        m[i]=rand()%100;
+        printf("%d ",m[i]);
+    } while(++i<5);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+stdlib.h&gt;
+void generarMuestra(int m[],int n) {
+    for(int i=0;
+    i<n;
+    i++)m[i]=rand()%100;
+}
+void mostrar(int m[],int n) {
+    for(int i=0;
+    i<n;
+    i++)printf("%d ",m[i]);
+}
+int main() {
+    int m[5];
+    generarMuestra(m,5);
+    mostrar(m,5);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">42 17 89 5 63</div></div></div><div class="exercise"><h4>Ejercicio 19: Clasificación Binaria</h4><p>Clasificar scores en positivo/negativo.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float s[]= {
+        0.72,0.45,0.89,0.33
+    } ;
+    for(int i=0;
+    i<4;
+    i++)printf("%s ",s[i]>=0.5?"Positivo":"Negativo");
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void clasificar( float s[],int n) {
+    for(int i=0;
+    i<n;
+    i++)printf("%s ",s[i]>=0.5?"Positivo":"Negativo");
+}
+int main() {
+    float s[]= {
+        0.72,0.45,0.89,0.33
+    } ;
+    clasificar(s,4);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Positivo Negativo Positivo Negativo</div></div></div><div class="exercise"><h4>Ejercicio 20: Imputación de Valores</h4><p>Reemplazar valores faltantes por media.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float d[]= {
+        23.5,-999,34.2,-999,28.7
+    } ,m=28.8;
+    for(int i=0;
+    i<5;
+    i++)printf("%.1f ",d[i]==-999?m:d[i]);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void imputar( float d[],int n, float m) {
+    for(int i=0;
+    i<n;
+    i++)
+    if(d[i]==-999)d[i]=m;
+}
+void mostrar( float d[],int n) {
+    for(int i=0;
+    i<n;
+    i++)printf("%.1f ",d[i]);
+}
+int main() {
+    float d[]= {
+        23.5,-999,34.2,-999,28.7
+    } ;
+    imputar(d,5,28.8);
+    mostrar(d,5);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">23.5 28.8 34.2 28.8 28.7</div></div></div><div class="exercise"><h4>Ejercicio 21: Estadísticas Descriptivas</h4><p>Calcular media y varianza de datasets.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+math.h&gt;
+int main() {
+    float t[]= {
+        23.5,25.1,24.8,26.2,23.9
+    } ;
+    float s=0,m,v=0;
+    for(int i=0;
+    i<5;
+    i++)s+=t[i];
+    m=s/5;
+    for(int i=0;
+    i<5;
+    i++)v+=pow(t[i]-m,2);
+    v/=5;
+    printf("Temp-Media:%.2f,Varianza:%.2f\n",m,v);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+#include &lt;
+math.h&gt;
+void estadisticas( float d[],int n,float*m,float*v) {
+    float s=0;
+    for(int i=0;
+    i<n;
+    i++)s+=d[i];
+    *m=s/n;
+    *v=0;
+    for(int i=0;
+    i<n;
+    i++)*v+=pow(d[i]-*m,2);
+    *v/=n;
+}
+int main() {
+    float t[]= {
+        23.5,25.1,24.8,26.2,23.9
+    } ,m,v;
+    estadisticas(t,5,&m,&v);
+    printf("Media:%.2f,Varianza:%.2f\n",m,v);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Temp-Media:24.70,Varianza:0.69</div></div></div><div class="exercise"><h4>Ejercicio 22: Normalización Múltiple</h4><p>Normalizar múltiples variables.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float e[]= {
+        25,30,45,22,35,28
+    } ,en[6],min=22,max=45;
+    for(int i=0;
+    i<6;
+    i++)en[i]=(e[i]-min)/(max-min);
+    printf("Edades norm:\n");
+    for(int i=0;
+    i<6;
+    i++)printf("%.3f ",en[i]);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void normalizarArray( float d[], float r[],int n, float min, float max) {
+    for(int i=0;
+    i<n;
+    i++)r[i]=(d[i]-min)/(max-min);
+}
+int main() {
+    float e[]= {
+        25,30,45,22,35,28
+    } ,en[6];
+    normalizarArray(e,en,6,22,45);
+    for(int i=0;
+    i<6;
+    i++)printf("%.3f ",en[i]);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Edades norm:
+0.130 0.348 1.000 0.000 0.565 0.261</div></div></div><div class="exercise"><h4>Ejercicio 23: Validación de Sensores</h4><p>Validar datos de múltiples sensores.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float t[]= {
+        23.5,150,-50,24.8,25.2
+    } ;
+    int v=0;
+    for(int i=0;
+    i<5;
+    i++) {
+        if(t[i]>=-40&&t[i]<=80) {
+            printf("Dato%d:%.1f-VALIDO\n",i+1,t[i]);
+            v++;
+        } else printf("Dato%d:%.1f-INVALIDO\n",i+1,t[i]);
+    } printf("Validos:%d/5\n",v);
+    return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+int validarSensor( float d[],int n, float min, float max) {
+    int v=0;
+    for(int i=0;
+    i<n;
+    i++) {
+        if(d[i]>=min&&d[i]<=max)v++;
+    } return v;
+}
+void mostrarValidacion( float d[],int n, float min, float max) {
+    for(int i=0;
+    i<n;
+    i++)printf("Dato%d:%.1f-%s\n",i+1,d[i],(d[i]>=min&&d[i]<=max)?"VALIDO":"INVALIDO");
+}
+int main() {
+    float t[]= {
+        23.5,150,-50,24.8,25.2
+    } ;
+    mostrarValidacion(t,5,-40,80);
+    printf("Validos:%d/5\n",validarSensor(t,5,-40,80));
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Dato1:23.5-VALIDO
+Dato2:150.0-INVALIDO
+Dato3:-50.0-INVALIDO
+Dato4:24.8-VALIDO
+Dato5:25.2-VALIDO
+Validos:3/5</div></div></div><div class="exercise"><h4>Ejercicio 24: Clasificación Múltiple</h4><p>Clasificar múltiples variables en categorías.</p><div class="code-section"><div class="code-label">💻 Código  Original</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    float a[]= {
+        45.5,105.2,75.8,165.3,35.1,95.7
+    } ;
+    for(int i=0;
+    i<6;
+    i++) {
+        printf("Estacion%d(%.1f):",i+1,a[i]);
+        if(a[i]<=50)printf("Buena\n");
+        else if(a[i]<=100)printf("Moderada\n");
+        else if(a[i]<=150)printf("Mala\n");
+        else printf("MuyMala\n");
+    } return 0;
+}</code></pre></div><div class="code-section"><div class="code-label">🔧 Convertido a Función</div><pre><code>#include &lt;
+stdio.h&gt;
+void clasificarCalidad( float v) {
+    if(v<=50)printf("Buena");
+    else if(v<=100)printf("Moderada");
+    else if(v<=150)printf("Mala");
+    else printf("MuyMala");
+}
+int main() {
+    float a[]= {
+        45.5,105.2,75.8,165.3,35.1,95.7
+    } ;
+    for(int i=0;
+    i<6;
+    i++) {
+        printf("Est%d(%.1f):",i+1,a[i]);
+        clasificarCalidad(a[i]);
+        printf("\n");
+    } return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Estacion1(45.5):Buena
+Estacion2(105.2):Mala
+Estacion3(75.8):Moderada
+Estacion4(165.3):MuyMala
+Estacion5(35.1):Buena
+Estacion6(95.7):Moderada</div></div></div><div class="exercise"><h4>Ejercicio 25: Funciones Trigonométricas</h4><p>Calcular seno, coseno y tangente de ángulos.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include&lt;
+iostream&gt;
+#include&lt;
+cmath&gt;
+using namespace std;
+double trig(int op, double g) {
+    double r=g*3.1416/180;
+    if(op==1)return sin(r);
+    else if(op==2)return cos(r);
+    else if(op==3)return tan(r);
+    else return 0;
+}
+int main() {
+    int o;
+    double a;
+    cout<<"1.Seno\n2.Coseno\n3.Tangente\nOpcion:";
+    cin>>o;
+    cout<<"Angulo:";
+    cin>>a;
+    cout<<"Resultado:"<<trig(o,a)<<endl;
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">1.Seno
+2.Coseno
+3.Tangente
+Opcion: 1
+Angulo: 30
+Resultado: 0.5</div></div></div><div class="exercise"><h4>Ejercicio 26: x++</h4><p>Post-incremento en C.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=5;
+    printf("%d",x++);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">5</div></div></div><div class="exercise"><h4>Ejercicio 27: Operador Ternario</h4><p>Mayor de dos números.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int a=10,b=20,c=(a>b)?a:b;
+    printf("%d",c);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">20</div></div></div><div class="exercise"><h4>Ejercicio 28: Macro CUADRADO</h4><p>Macro con error de precedencia.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+#define CUADRADO(x) x*x
+int main() {
+    int r=CUADRADO(3+2);
+    printf("%d",r);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">11</div></div></div><div class="exercise"><h4>Ejercicio 29: AND Bit a Bit</h4><p>Operación AND entre bits.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=8,y=x&4;
+    printf("%d",y);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">0</div></div></div><div class="exercise"><h4>Ejercicio 30: Bucle For</h4><p>Iteración con for.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int i;
+    for(i=0;
+    i<5;
+    i++)printf("%d",i);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">01234</div></div></div><div class="exercise"><h4>Ejercicio 31: Par o Impar</h4><p>Verificar paridad.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=15;
+    if(x%2==0)printf("Par");
+    else printf("Impar");
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Impar</div></div></div><div class="exercise"><h4>Ejercicio 32: Macro MAX</h4><p>Macro para máximo.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+#define MAX(a,b)((a)>(b)?(a):(b))
+int main() {
+    int x=MAX(5,8);
+    printf("%d",x);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">8</div></div></div><div class="exercise"><h4>Ejercicio 33: Función Suma</h4><p>Suma con función.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int suma(int a,int b) {
+    return a+b;
+}
+int main() {
+    int r=suma(3,7);
+    printf("%d",r);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">10</div></div></div><div class="exercise"><h4>Ejercicio 34: División Entera</h4><p>División entre enteros.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=5,y=2,z=x/y;
+    printf("%d",z);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">2</div></div></div><div class="exercise"><h4>Ejercicio 35: While Loop</h4><p>Bucle while.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int i=0;
+    while(i<3) {
+        printf("%d",i);
+        i++;
+    } return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">012</div></div></div><div class="exercise"><h4>Ejercicio 36: ++x</h4><p>Pre-incremento.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=10;
+    printf("%d",++x);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">11</div></div></div><div class="exercise"><h4>Ejercicio 37: Switch con Módulo</h4><p>Switch usando módulo.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int n=7;
+    switch(n%2) {
+        case 0:n=1;
+        break;
+        case 1:n=0;
+        break;
+    } printf("%d",n);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">0</div></div></div><div class="exercise"><h4>Ejercicio 38: Constante PI</h4><p>Uso de define.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+#define PI 3.14
+int main() {
+    float r=2;
+    printf("%.1f",PI*r);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">6.3</div></div></div><div class="exercise"><h4>Ejercicio 39: Operador +=</h4><p>Suma y asignación.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int a=5;
+    a+=3;
+    printf("%d",a);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">8</div></div></div><div class="exercise"><h4>Ejercicio 40: Do-While</h4><p>Bucle do-while.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int i=1;
+    do {
+        printf("%d",i);
+        i++;
+    } while(i<=2);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">12</div></div></div><div class="exercise"><h4>Ejercicio 41: OR Bit a Bit</h4><p>Operación OR entre bits.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=12,y=x|3;
+    printf("%d",y);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">15</div></div></div><div class="exercise"><h4>Ejercicio 42: Función Doble</h4><p>Función que retorna doble.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int doble(int n) {
+    return n*2;
+}
+int main() {
+    int x=doble(4);
+    printf("%d",x);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">8</div></div></div><div class="exercise"><h4>Ejercicio 43: Operadores Lógicos</h4><p>AND lógico.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int x=5,y=5;
+    if(x==y&&x>0)printf("SI");
+    else printf("NO");
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">SI</div></div></div><div class="exercise"><h4>Ejercicio 44: Macro TRIPLE</h4><p>Macro con paréntesis.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+#define TRIPLE(x)(x*3)
+int main() {
+    printf("%d",TRIPLE(2+1));
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">7</div></div></div><div class="exercise"><h4>Ejercicio 45: Suma Acumulada</h4><p>For con acumulador.</p><div class="code-section"><div class="code-label">💻 Código</div><pre><code>#include &lt;
+stdio.h&gt;
+int main() {
+    int c=0;
+    for(int i=1;
+    i<=4;
+    i++) {
+        c+=i;
+    } printf("%d",c);
+    return 0;
+}</code></pre></div><div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">10</div></div></div></div></div>
         </div>
     </section>
 
-    <section id="add" class="add-project">
-        <div class="section-header fade-in">
-            <div class="section-label">Agregar Trabajo</div>
-            <h2 class="section-title">Nueva Actividad</h2>
-        </div>
-        <div class="form-container fade-in">
-            <form id="projectForm">
-                <div class="form-group">
-                    <label for="title">Título del Proyecto</label>
-                    <input type="text" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Descripción Técnica</label>
-                    <textarea id="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="tech">Tecnologías (separadas por comas)</label>
-                    <input type="text" id="tech" placeholder="Python, C++, Git">
-                </div>
-                <div class="form-group">
-                    <label>Documentación PDF</label>
-                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                        <input type="file" id="fileInput" accept=".pdf" multiple>
-                        <p id="fileLabel">Haz clic para cargar archivos PDF</p>
+    
+    <section id="add">
+        <div class="container">
+            <h2 class="section-title">Agregar Trabajo</h2>
+            <div class="about-content">
+                <h2>Nueva Actividad</h2>
+                <form style="margin-top: 2rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <input type="text" placeholder="Título del Proyecto" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light); border-radius: 10px; font-size: 1rem;">
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Agregar Proyecto</button>
-            </form>
+                    <div style="margin-bottom: 1.5rem;">
+                        <textarea placeholder="Descripción Técnica" rows="4" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light); border-radius: 10px; font-size: 1rem; font-family: inherit;"></textarea>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <input type="text" placeholder="Tecnologías (separadas por comas)" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light); border-radius: 10px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text); font-weight: 500;">Documentación PDF</label>
+                        <div style="border: 2px dashed var(--primary); border-radius: 10px; padding: 2rem; text-align: center; background: var(--light); cursor: pointer;">
+                            <p style="color: var(--primary); margin: 0;">Haz clic para cargar archivos PDF</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn" style="background: var(--primary); color: white; border: none; cursor: pointer; width: 100%;">Agregar Proyecto</button>
+                </form>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-text">© 2026 Aldair Adriano Quispe Ccoito. Todos los derechos reservados.</div>
-            <div class="footer-links">
-                <a href="#">GitHub</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Email</a>
-            </div>
-        </div>
+        <p>© 2026 Aldair Adriano Quispe Ccoito. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Fade In Animation on Scroll
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Counter Animation
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                    element.textContent = Math.floor(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            };
-
-            updateCounter();
-        }
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target.querySelector('.stat-number');
-                    animateCounter(counter);
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.stat-card').forEach(card => statsObserver.observe(card));
-
-        // File Upload
-        document.getElementById('fileInput').addEventListener('change', function() {
-            const fileLabel = document.getElementById('fileLabel');
-            const files = this.files;
-            if (files.length > 0) {
-                fileLabel.textContent = `${files.length} archivo(s) seleccionado(s)`;
-            }
-        });
-
-        // Form Submission
-        document.getElementById('projectForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Proyecto agregado exitosamente!');
-            this.reset();
-            document.getElementById('fileLabel').textContent = 'Haz clic para cargar archivos PDF';
-        });
-
-        // Tab Switching
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Week Toggle
         function toggleWeek(header) {
-            const weekSection = header.parentElement;
-            weekSection.classList.toggle('open');
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            content.classList.toggle('active');
+            icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
         }
     </script>
 </body>
