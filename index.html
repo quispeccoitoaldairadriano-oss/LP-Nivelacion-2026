@@ -2260,6 +2260,1734 @@ int main() {
         </div>
     </section>
 
+            <!-- SEMANA 4 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📙 Semana 4: Análisis de Complejidad y Manejo de Archivos</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+
+                    <!-- DIA MIERCOLES -->
+                    <div class="exercise">
+                        <h4>📅 Día Miércoles: Análisis de Complejidad y Tiempo Computacional</h4>
+                        <p style="color:var(--neon-purple); font-family:'Orbitron',sans-serif; font-size:0.85rem;">Análisis de eficiencia algorítmica con medición de tiempos reales</p>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1: Complejidad O(n²) — Doble Bucle</h4>
+                        <p>Complejidad temporal O(n²). Con n=100,000 se realizan 10,000,000,000 operaciones.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+int main() {
+    long long n;
+    cout &lt;&lt; "Ingrese n: ";
+    cin &gt;&gt; n;
+    long long suma = 0;
+    auto inicio = high_resolution_clock::now();
+    for(long long i = 0; i &lt; n; i++) {
+        for(long long j = 0; j &lt; n; j++) {
+            suma += 1;
+        }
+    }
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    long long minutos = duracion.count() / 60000;
+    long long segundos = (duracion.count() % 60000) / 1000;
+    long long milisegundos = duracion.count() % 1000;
+    cout &lt;&lt; "Resultado suma: " &lt;&lt; suma &lt;&lt; endl;
+    cout &lt;&lt; "Tiempo: " &lt;&lt; minutos &lt;&lt; "m " &lt;&lt; segundos &lt;&lt; "s " &lt;&lt; milisegundos &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese n: 100000
+Resultado suma: 10000000000
+Tiempo: 0m 9s 231ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 2: Búsqueda Binaria O(log n)</h4>
+                        <p>Con 1,000,000 elementos, la búsqueda binaria necesita máximo ~20 comparaciones.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+int busqueda_binaria(const vector&lt;int&gt;&amp; arr, int x, int&amp; comparaciones) {
+    int izq = 0, der = arr.size() - 1;
+    comparaciones = 0;
+    while (izq &lt;= der) {
+        comparaciones++;
+        int medio = izq + (der - izq) / 2;
+        if (arr[medio] == x) return medio;
+        if (arr[medio] &lt; x) izq = medio + 1;
+        else der = medio - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Ingrese tamaño del arreglo (n): ";
+    cin &gt;&gt; n;
+    vector&lt;int&gt; arr(n);
+    for (int i = 0; i &lt; n; i++) arr[i] = i;
+    int x;
+    cout &lt;&lt; "Ingrese numero a buscar: ";
+    cin &gt;&gt; x;
+    int comparaciones = 0;
+    auto inicio = high_resolution_clock::now();
+    int posicion = busqueda_binaria(arr, x, comparaciones);
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    if (posicion != -1)
+        cout &lt;&lt; "Elemento encontrado en posicion: " &lt;&lt; posicion &lt;&lt; endl;
+    else
+        cout &lt;&lt; "Elemento no encontrado" &lt;&lt; endl;
+    cout &lt;&lt; "Comparaciones realizadas: " &lt;&lt; comparaciones &lt;&lt; endl;
+    cout &lt;&lt; "Tiempo: " &lt;&lt; duracion.count()/60000 &lt;&lt; "m " &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s " &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese tamaño del arreglo (n): 1000000
+Ingrese numero a buscar: 500000
+Elemento encontrado en posicion: 500000
+Comparaciones realizadas: 20
+Tiempo: 0m 0s 12ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 3: Comparación O(n) vs O(n²) vs O(1)</h4>
+                        <p>El Código C (O(1)) es el más eficiente para n=10,000.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+int main() {
+    long long n;
+    cout &lt;&lt; "Ingrese el valor de n: ";
+    cin &gt;&gt; n;
+    long long sumA = 0, sumB = 0, sumC = 0;
+
+    auto inicioA = high_resolution_clock::now();
+    for (long long i = 0; i &lt; n; i++) sumA += i;
+    auto finA = high_resolution_clock::now();
+    auto durA = duration_cast&lt;milliseconds&gt;(finA - inicioA).count();
+
+    auto inicioB = high_resolution_clock::now();
+    for (long long i = 0; i &lt; n; i++)
+        for (long long j = 0; j &lt; i; j++) sumB += j;
+    auto finB = high_resolution_clock::now();
+    auto durB = duration_cast&lt;milliseconds&gt;(finB - inicioB).count();
+
+    auto inicioC = high_resolution_clock::now();
+    sumC = n * (n + 1) / 2;
+    auto finC = high_resolution_clock::now();
+    auto durC = duration_cast&lt;milliseconds&gt;(finC - inicioC).count();
+
+    cout &lt;&lt; "
+===== RESULTADOS =====
+";
+    cout &lt;&lt; "
+Codigo A (O(n))
+Resultado sum: " &lt;&lt; sumA &lt;&lt; "
+Tiempo: " &lt;&lt; durA &lt;&lt; " ms
+";
+    cout &lt;&lt; "
+Codigo B (O(n^2))
+Resultado sum: " &lt;&lt; sumB &lt;&lt; "
+Tiempo: " &lt;&lt; durB &lt;&lt; " ms
+";
+    cout &lt;&lt; "
+Codigo C (O(1))
+Resultado sum: " &lt;&lt; sumC &lt;&lt; "
+Tiempo: " &lt;&lt; durC &lt;&lt; " ms
+";
+    cout &lt;&lt; "
+===== MAS EFICIENTE =====
+";
+    if (durA &lt;= durB &amp;&amp; durA &lt;= durC) cout &lt;&lt; "El mas eficiente fue el Codigo A
+";
+    else if (durB &lt;= durA &amp;&amp; durB &lt;= durC) cout &lt;&lt; "El mas eficiente fue el Codigo B
+";
+    else cout &lt;&lt; "El mas eficiente fue el Codigo C
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese el valor de n: 10000
+
+===== RESULTADOS =====
+
+Codigo A (O(n))
+Resultado sum: 49995000
+Tiempo: 0 ms
+
+Codigo B (O(n^2))
+Resultado sum: 166616670000
+Tiempo: 55 ms
+
+Codigo C (O(1))
+Resultado sum: 50005000
+Tiempo: 0 ms
+
+===== MAS EFICIENTE =====
+El mas eficiente fue el Codigo A</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 4: Fibonacci Recursivo O(2ⁿ)</h4>
+                        <p>Ineficiente porque recalcula los mismos valores muchas veces. Complejidad O(2ⁿ).</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+long long llamadas = 0;
+
+long long fibonacci(int n) {
+    llamadas++;
+    if(n &lt;= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+void mostrarTiempo(milliseconds duracion) {
+    cout &lt;&lt; duracion.count()/60000 &lt;&lt; "m "
+         &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s "
+         &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Ingrese n: ";
+    cin &gt;&gt; n;
+    auto inicio = high_resolution_clock::now();
+    long long resultado = fibonacci(n);
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    cout &lt;&lt; "
+Fibonacci(" &lt;&lt; n &lt;&lt; ") = " &lt;&lt; resultado &lt;&lt; endl;
+    cout &lt;&lt; "Llamadas recursivas: " &lt;&lt; llamadas &lt;&lt; endl;
+    cout &lt;&lt; "Tiempo de ejecucion: ";
+    mostrarTiempo(duracion);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese n: 40
+
+Fibonacci(40) = 102334155
+Llamadas recursivas: 331160281
+Tiempo de ejecucion: 0m 0s 506ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 5: Eliminar Duplicados — O(n²) temporal, O(n) espacial</h4>
+                        <p>Complejidad temporal O(n²) por los bucles anidados. Complejidad espacial O(n) por el arreglo temporal.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+vector&lt;int&gt; eliminar_duplicados(const vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    vector&lt;int&gt; temp(n);
+    int k = 0;
+    for(int i = 0; i &lt; n; i++) {
+        bool duplicado = false;
+        for(int j = 0; j &lt; k; j++) {
+            if(arr[i] == temp[j]) { duplicado = true; break; }
+        }
+        if(!duplicado) temp[k++] = arr[i];
+    }
+    temp.resize(k);
+    return temp;
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Ingrese n: "; cin &gt;&gt; n;
+    vector&lt;int&gt; arr(n);
+    cout &lt;&lt; "Ingrese los elementos del arreglo:
+";
+    for(int i = 0; i &lt; n; i++) cin &gt;&gt; arr[i];
+    auto inicio = high_resolution_clock::now();
+    vector&lt;int&gt; resultado = eliminar_duplicados(arr);
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    cout &lt;&lt; "
+Arreglo sin duplicados:
+";
+    for(int x : resultado) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; "
+Cantidad final: " &lt;&lt; resultado.size() &lt;&lt; endl;
+    cout &lt;&lt; "Tiempo: " &lt;&lt; duracion.count()/60000 &lt;&lt; "m " &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s " &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese n: 10
+Ingrese los elementos del arreglo:
+1 2 3 4 4 4 5 6 7 8
+
+Arreglo sin duplicados:
+1 2 3 4 5 6 7 8
+Cantidad final: 8
+Tiempo de ejecucion: 0m 0s 0ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 6: Bucle con i*2 — O(log n)</h4>
+                        <p>El número de iteraciones es log₂(n), complejidad O(log n).</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+#include &lt;cmath&gt;
+using namespace std;
+using namespace chrono;
+
+int main() {
+    long long n;
+    cout &lt;&lt; "Ingrese n: "; cin &gt;&gt; n;
+    long long count = 0;
+    auto inicio = high_resolution_clock::now();
+    for (long long i = 1; i &lt; n; i = i * 2) count++;
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    cout &lt;&lt; "
+Iteraciones reales: " &lt;&lt; count &lt;&lt; endl;
+    cout &lt;&lt; "Valor teorico (log2 n): " &lt;&lt; log2(n) &lt;&lt; endl;
+    cout &lt;&lt; "Tiempo: " &lt;&lt; duracion.count()/60000 &lt;&lt; "m " &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s " &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese n: 1000
+
+Iteraciones reales: 10
+Valor teorico (log2 n): 9.96578
+Tiempo de ejecucion: 0m 0s 0ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 7: Bubble Sort vs QuickSort</h4>
+                        <p>Bubble Sort peor caso O(n²). QuickSort peor caso O(n²), promedio O(n log n). QuickSort es significativamente más rápido en la práctica.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;chrono&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+using namespace chrono;
+
+void bubble_sort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for(int i = 0; i &lt; n - 1; i++)
+        for(int j = 0; j &lt; n - i - 1; j++)
+            if(arr[j] &gt; arr[j+1]) swap(arr[j], arr[j+1]);
+}
+
+int particion(vector&lt;int&gt;&amp; arr, int bajo, int alto) {
+    int pivote = arr[alto], i = bajo - 1;
+    for(int j = bajo; j &lt; alto; j++)
+        if(arr[j] &lt; pivote) { i++; swap(arr[i], arr[j]); }
+    swap(arr[i+1], arr[alto]);
+    return i + 1;
+}
+
+void quicksort(vector&lt;int&gt;&amp; arr, int bajo, int alto) {
+    if(bajo &lt; alto) {
+        int pi = particion(arr, bajo, alto);
+        quicksort(arr, bajo, pi - 1);
+        quicksort(arr, pi + 1, alto);
+    }
+}
+
+int main() {
+    const int n = 10000;
+    vector&lt;int&gt; datos(n);
+    for(int i = 0; i &lt; n; i++) datos[i] = rand();
+    vector&lt;int&gt; copia_bubble = datos, copia_quick = datos;
+
+    auto inicioBubble = high_resolution_clock::now();
+    bubble_sort(copia_bubble);
+    auto finBubble = high_resolution_clock::now();
+    auto durBubble = duration_cast&lt;milliseconds&gt;(finBubble - inicioBubble);
+
+    auto inicioQuick = high_resolution_clock::now();
+    quicksort(copia_quick, 0, n - 1);
+    auto finQuick = high_resolution_clock::now();
+    auto durQuick = duration_cast&lt;milliseconds&gt;(finQuick - inicioQuick);
+
+    cout &lt;&lt; "Comparacion con n = 10000 elementos
+
+";
+    cout &lt;&lt; "Bubble Sort (Peor caso O(n^2))
+Tiempo: " &lt;&lt; durBubble.count() &lt;&lt; "ms
+";
+    cout &lt;&lt; "
+QuickSort (Promedio O(n log n), Peor caso O(n^2))
+Tiempo: " &lt;&lt; durQuick.count() &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Comparacion con n = 10000 elementos
+
+Bubble Sort (Peor caso O(n^2))
+Tiempo: 0m 0s 313ms
+
+QuickSort (Promedio O(n log n), Peor caso O(n^2))
+Tiempo: 0m 0s 2ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 8: Verificar Número Primo — O(√n)</h4>
+                        <p>Solo se prueba divisibilidad hasta la raíz cuadrada de n, reduciendo comparaciones a O(√n).</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+bool es_primo(long long n) {
+    if(n &lt; 2) return false;
+    for(long long i = 2; i * i &lt;= n; i++)
+        if(n % i == 0) return false;
+    return true;
+}
+
+int main() {
+    long long n;
+    cout &lt;&lt; "Ingrese un numero: "; cin &gt;&gt; n;
+    auto inicio = high_resolution_clock::now();
+    bool primo = es_primo(n);
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    if(primo) cout &lt;&lt; n &lt;&lt; " es primo
+";
+    else cout &lt;&lt; n &lt;&lt; " no es primo
+";
+    cout &lt;&lt; "Tiempo: " &lt;&lt; duracion.count()/60000 &lt;&lt; "m " &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s " &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese un numero: 12345
+12345 no es primo
+Tiempo: 0m 0s 0ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 9: Multiplicación de Matrices n×n — O(n³)</h4>
+                        <p>Complejidad O(n³). El algoritmo de Strassen mejora esto a O(n^2.81) usando división en bloques y técnicas algebraicas.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C++</div>
+                        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;chrono&gt;
+using namespace std;
+using namespace chrono;
+
+int main() {
+    int n;
+    cout &lt;&lt; "Ingrese n (tamano de matrices n x n): "; cin &gt;&gt; n;
+    vector&lt;vector&lt;long long&gt;&gt; A(n, vector&lt;long long&gt;(n));
+    vector&lt;vector&lt;long long&gt;&gt; B(n, vector&lt;long long&gt;(n));
+    vector&lt;vector&lt;long long&gt;&gt; C(n, vector&lt;long long&gt;(n, 0));
+    cout &lt;&lt; "
+Ingrese los valores de la matriz A:
+";
+    for(int i = 0; i &lt; n; i++)
+        for(int j = 0; j &lt; n; j++) cin &gt;&gt; A[i][j];
+    cout &lt;&lt; "
+Ingrese los valores de la matriz B:
+";
+    for(int i = 0; i &lt; n; i++)
+        for(int j = 0; j &lt; n; j++) cin &gt;&gt; B[i][j];
+    auto inicio = high_resolution_clock::now();
+    for(int i = 0; i &lt; n; i++)
+        for(int j = 0; j &lt; n; j++)
+            for(int k = 0; k &lt; n; k++)
+                C[i][j] += A[i][k] * B[k][j];
+    auto fin = high_resolution_clock::now();
+    cout &lt;&lt; "
+Matriz Resultado C = A x B:
+";
+    for(int i = 0; i &lt; n; i++) {
+        for(int j = 0; j &lt; n; j++) cout &lt;&lt; C[i][j] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+    auto duracion = duration_cast&lt;milliseconds&gt;(fin - inicio);
+    cout &lt;&lt; "
+Tiempo: " &lt;&lt; duracion.count()/60000 &lt;&lt; "m " &lt;&lt; (duracion.count()%60000)/1000 &lt;&lt; "s " &lt;&lt; duracion.count()%1000 &lt;&lt; "ms
+";
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese n (tamano de matrices n x n): 2
+Ingrese los valores de la matriz A: 1 2 3 4
+Ingrese los valores de la matriz B: 4 3 2 1
+
+Matriz Resultado C = A x B:
+8 5
+20 13
+
+Tiempo de ejecucion: 0m 0s 0ms</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 10: Complejidad en Estructuras de Datos</h4>
+                        <p>Comparación de complejidades de operaciones en Array, Lista Enlazada y Hash Table.</p>
+                        <div class="text-content">
+                            <table style="width:100%; border-collapse:collapse; font-family:'Courier New',monospace; font-size:0.9rem;">
+                                <tr style="background:rgba(0,243,255,0.15);">
+                                    <th style="border:1px solid rgba(0,243,255,0.4); padding:0.6rem; color:var(--neon-blue);">Operación</th>
+                                    <th style="border:1px solid rgba(0,243,255,0.4); padding:0.6rem; color:var(--neon-blue);">Array</th>
+                                    <th style="border:1px solid rgba(0,243,255,0.4); padding:0.6rem; color:var(--neon-blue);">Lista Enlazada</th>
+                                    <th style="border:1px solid rgba(0,243,255,0.4); padding:0.6rem; color:var(--neon-blue);">Hash Table</th>
+                                </tr>
+                                <tr style="background:rgba(5,8,22,0.6);">
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-light);">Acceso por índice</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-muted);">No aplica</td>
+                                </tr>
+                                <tr style="background:rgba(5,8,22,0.3);">
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-light);">Búsqueda</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1) promedio</td>
+                                </tr>
+                                <tr style="background:rgba(5,8,22,0.6);">
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-light);">Inserción al inicio</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1) promedio</td>
+                                </tr>
+                                <tr style="background:rgba(5,8,22,0.3);">
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-light);">Inserción al final</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)**</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1) promedio</td>
+                                </tr>
+                                <tr style="background:rgba(5,8,22,0.6);">
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:var(--text-light);">Eliminación</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#ff00e6;">O(n)</td>
+                                    <td style="border:1px solid rgba(0,243,255,0.2); padding:0.6rem; color:#00f3ff;">O(1) promedio</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- DIA JUEVES -->
+                    <div class="exercise">
+                        <h4>📅 Día Jueves: Manejo de Archivos en C — Lectura y Escritura</h4>
+                        <p style="color:var(--neon-purple); font-family:'Orbitron',sans-serif; font-size:0.85rem;">Operaciones de entrada/salida con archivos en C</p>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1 (Jueves): Sistema de Registro de Temperaturas</h4>
+                        <p>Guarda 5 temperaturas en archivo, calcula estadísticas y las agrega al mismo archivo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    float temp, suma = 0, max, min;
+    archivo = fopen("temperaturas.txt", "w");
+    if (archivo == NULL) { printf("Error al abrir el archivo
+"); return 1; }
+    fprintf(archivo, "MEDICIONES:
+");
+    for(int i = 0; i &lt; 5; i++) {
+        printf("Ingrese temperatura %d: ", i + 1);
+        scanf("%f", &amp;temp);
+        fprintf(archivo, "%.2f
+", temp);
+    }
+    fclose(archivo);
+    archivo = fopen("temperaturas.txt", "r");
+    char linea[50];
+    fscanf(archivo, "%[^
+]
+", linea);
+    for(int i = 0; i &lt; 5; i++) {
+        fscanf(archivo, "%f", &amp;temp);
+        if(i == 0) { max = min = temp; }
+        suma += temp;
+        if(temp &gt; max) max = temp;
+        if(temp &lt; min) min = temp;
+    }
+    fclose(archivo);
+    float promedio = suma / 5;
+    archivo = fopen("temperaturas.txt", "a");
+    fprintf(archivo, "
+ESTADISTICAS:
+");
+    fprintf(archivo, "Promedio: %.2f
+", promedio);
+    fprintf(archivo, "Maxima: %.2f
+", max);
+    fprintf(archivo, "Minima: %.2f
+", min);
+    fclose(archivo);
+    printf("
+Datos guardados correctamente en temperaturas.txt
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Ingrese temperatura 1: 23.5
+Ingrese temperatura 2: 25.1
+Ingrese temperatura 3: 24.8
+Ingrese temperatura 4: 26.2
+Ingrese temperatura 5: 23.9
+
+Datos guardados correctamente en temperaturas.txt
+
+--- temperaturas.txt ---
+MEDICIONES:
+23.50
+25.10
+24.80
+26.20
+23.90
+
+ESTADISTICAS:
+Promedio: 24.70
+Maxima: 26.20
+Minima: 23.50</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 2 (Jueves): Base de Datos Simple de Productos</h4>
+                        <p>Sistema de inventario con archivos binarios: agregar, listar, buscar y actualizar productos.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+typedef struct {
+    int codigo; char nombre[30]; float precio; int stock;
+} Producto;
+
+void agregar_producto() {
+    FILE *f = fopen("productos.dat", "ab");
+    Producto p;
+    printf("Ingrese codigo: "); scanf("%d", &amp;p.codigo); getchar();
+    printf("Ingrese nombre: "); fgets(p.nombre, 30, stdin);
+    p.nombre[strcspn(p.nombre, "
+")] = 0;
+    printf("Ingrese precio: "); scanf("%f", &amp;p.precio);
+    printf("Ingrese stock: "); scanf("%d", &amp;p.stock);
+    fwrite(&amp;p, sizeof(Producto), 1, f);
+    fclose(f);
+    printf("Producto agregado exitosamente!
+");
+}
+
+void listar_productos() {
+    FILE *f = fopen("productos.dat", "rb");
+    if (f == NULL) { printf("No hay productos registrados.
+"); return; }
+    Producto p;
+    printf("
+--- LISTA DE PRODUCTOS ---
+");
+    while (fread(&amp;p, sizeof(Producto), 1, f)) {
+        printf("Codigo: %d
+Nombre: %s
+Precio: %.2f
+Stock: %d
+---
+",
+               p.codigo, p.nombre, p.precio, p.stock);
+    }
+    fclose(f);
+}
+
+int main() {
+    int opcion, codigo, cantidad;
+    do {
+        printf("
+=== SISTEMA DE INVENTARIO ===
+");
+        printf("1. Agregar producto
+2. Listar productos
+3. Buscar producto
+4. Actualizar stock
+5. Salir
+Opcion: ");
+        scanf("%d", &amp;opcion);
+        switch(opcion) {
+            case 1: agregar_producto(); break;
+            case 2: listar_productos(); break;
+            case 5: printf("Saliendo...
+"); break;
+        }
+    } while(opcion != 5);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">=== SISTEMA DE INVENTARIO ===
+1. Agregar producto
+2. Listar productos
+3. Buscar producto
+4. Actualizar stock
+5. Salir
+Opcion: 1
+Ingrese codigo: 1001
+Ingrese nombre: Laptop Tuf Gaming A15
+Ingrese precio: 4600.00
+Ingrese stock: 15
+Producto agregado exitosamente!
+
+--- LISTA DE PRODUCTOS ---
+Codigo: 1001
+Nombre: Laptop Tuf Gaming A15
+Precio: 4600.00
+Stock: 15
+-------------------------</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 3 (Jueves): Promedio de Edad de 100 Estudiantes</h4>
+                        <p>Lee 100 archivos individuales de alumnos y calcula el promedio de edad.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *f;
+    int edad, suma = 0;
+    char nombre[50];
+    for(int i = 1; i &lt;= 100; i++) {
+        sprintf(nombre, "alumnos_data/alumno_%d.txt", i);
+        f = fopen(nombre, "r");
+        fscanf(f, "%d", &amp;edad);
+        printf("archivo %s edad: %d 
+", nombre, edad);
+        suma = suma + edad;
+        fclose(f);
+    }
+    printf("Promedio: %.2f
+", (float)suma / 100);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">archivo alumnos_data/alumno_72.txt edad: 30
+archivo alumnos_data/alumno_73.txt edad: 30
+archivo alumnos_data/alumno_74.txt edad: 18
+...
+archivo alumnos_data/alumno_99.txt edad: 24
+archivo alumnos_data/alumno_100.txt edad: 27
+Promedio: 22.57</div></div>
+                    </div>
+
+                    <!-- DIA VIERNES -->
+                    <div class="exercise">
+                        <h4>📅 Día Viernes: Manejo de Múltiples Archivos en C</h4>
+                        <p style="color:var(--neon-purple); font-family:'Orbitron',sans-serif; font-size:0.85rem;">Creación, lectura, filtrado y consolidación de múltiples archivos</p>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1 (Viernes): Registro de Ventas Diarias</h4>
+                        <p>Escribe ventas de 3 días en archivos separados.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char nombre[30];
+    float ventas[] = {1500.50, 2300.75, 1800.00};
+    for (int dia = 1; dia &lt;= 3; dia++) {
+        sprintf(nombre, "venta_dia_%d.txt", dia);
+        archivo = fopen(nombre, "w");
+        fprintf(archivo, "%.2f
+", ventas[dia - 1]);
+        fclose(archivo);
+    }
+    printf("3 archivos de ventas creados
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">3 archivos de ventas creados
+(Archivos generados: venta_dia_1.txt, venta_dia_2.txt, venta_dia_3.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 2 (Viernes): Calcular Total de Ventas</h4>
+                        <p>Lee los 3 archivos de ventas y calcula el total acumulado.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char nombre[30];
+    float venta, total = 0;
+    for (int dia = 1; dia &lt;= 3; dia++) {
+        sprintf(nombre, "venta_dia_%d.txt", dia);
+        archivo = fopen(nombre, "r");
+        fscanf(archivo, "%f", &amp;venta);
+        total += venta;
+        fclose(archivo);
+    }
+    printf("Total de ventas: %.2f
+", total);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Total de ventas: 5601.25</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 3 (Viernes): Temperatura por Hora</h4>
+                        <p>Escribe temperaturas de 4 horas en archivos individuales.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char nombre[30];
+    float temperaturas[] = {18.5, 19.2, 20.1, 21.5};
+    for (int hora = 0; hora &lt; 4; hora++) {
+        sprintf(nombre, "temp_hora_%d.txt", hora);
+        archivo = fopen(nombre, "w");
+        fprintf(archivo, "Hora %d: %.1f C
+", hora, temperaturas[hora]);
+        fclose(archivo);
+    }
+    printf("Temperaturas guardadas
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Temperaturas guardadas
+(Archivos: temp_hora_0.txt, temp_hora_1.txt, temp_hora_2.txt, temp_hora_3.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 4 (Viernes): Temperatura Máxima por Hora</h4>
+                        <p>Lee los archivos de temperatura y determina la hora más calurosa.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char nombre[30];
+    int hora_actual;
+    float temp, temp_max = -999;
+    int hora_max = 0;
+    for (int h = 0; h &lt; 4; h++) {
+        sprintf(nombre, "temp_hora_%d.txt", h);
+        archivo = fopen(nombre, "r");
+        fscanf(archivo, "Hora %d: %f C", &amp;hora_actual, &amp;temp);
+        if (temp &gt; temp_max) { temp_max = temp; hora_max = hora_actual; }
+        fclose(archivo);
+    }
+    printf("Hora mas calurosa: %d (%.1f C)
+", hora_max, temp_max);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Hora mas calurosa: 3 (21.5 C)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 5 (Viernes): Sistema de Logs de Errores</h4>
+                        <p>Registra errores en archivos de log clasificados por tipo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+void registrar_error(char *tipo, char *mensaje) {
+    FILE *archivo;
+    char nombre[40];
+    sprintf(nombre, "log_%s.txt", tipo);
+    archivo = fopen(nombre, "a");
+    fprintf(archivo, "%s
+", mensaje);
+    fclose(archivo);
+}
+int main() {
+    registrar_error("red", "Conexion perdida");
+    registrar_error("disco", "Espacio insuficiente");
+    registrar_error("red", "Timeout en servidor");
+    printf("Errores registrados
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Errores registrados
+(Archivos generados: log_red.txt, log_disco.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 6 (Viernes): Estadísticas de Errores</h4>
+                        <p>Cuenta cuántos errores de red hay en el archivo de log.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char linea[100];
+    int contador = 0;
+    archivo = fopen("log_red.txt", "r");
+    while (fgets(linea, 100, archivo) != NULL) contador++;
+    fclose(archivo);
+    printf("Errores de red: %d
+", contador);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Errores de red: 2</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 7 (Viernes): Backup de Datos</h4>
+                        <p>Copia el contenido de un archivo a otro carácter por carácter.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *origen, *destino;
+    char c;
+    origen = fopen("datos.txt", "r");
+    destino = fopen("datos_backup.txt", "w");
+    while ((c = fgetc(origen)) != EOF) fputc(c, destino);
+    fclose(origen); fclose(destino);
+    printf("Backup completado
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Backup completado
+(Archivo generado: datos_backup.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 8 (Viernes): Filtrar Datos — Extraer Valores Altos</h4>
+                        <p>Filtra temperaturas mayores a 20°C y las guarda en un nuevo archivo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *entrada, *salida;
+    float temp;
+    entrada = fopen("todas_temps.txt", "r");
+    salida = fopen("temps_altas.txt", "w");
+    while (fscanf(entrada, "%f", &amp;temp) == 1) {
+        if (temp &gt; 20.0) fprintf(salida, "%.1f
+", temp);
+    }
+    fclose(entrada); fclose(salida);
+    printf("Filtrado completado
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Filtrado completado
+(Archivo generado: temps_altas.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 9 (Viernes): Consolidar Archivos — Unir Reportes</h4>
+                        <p>Une el contenido de 3 archivos de sucursales en un solo reporte.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *entrada, *salida;
+    char nombre[30], linea[100];
+    salida = fopen("reporte_total.txt", "w");
+    for (int sucursal = 1; sucursal &lt;= 3; sucursal++) {
+        sprintf(nombre, "sucursal_%d.txt", sucursal);
+        entrada = fopen(nombre, "r");
+        while (fgets(linea, 100, entrada) != NULL) fputs(linea, salida);
+        fclose(entrada);
+    }
+    fclose(salida);
+    printf("Reportes consolidados
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Reportes consolidados
+(Archivo generado: reporte_total.txt)</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 10 (Viernes): Procesar CSV — Análisis de Calificaciones</h4>
+                        <p>Lee un archivo CSV con notas y calcula el promedio por alumno.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    FILE *archivo;
+    char nombre[50];
+    float nota1, nota2, nota3, promedio;
+    archivo = fopen("notas.csv", "r");
+    fscanf(archivo, "%*[^
+]
+"); // Saltar encabezado
+    while (fscanf(archivo, "%[^,],%f,%f,%f
+",
+                  nombre, &amp;nota1, &amp;nota2, &amp;nota3) == 4) {
+        promedio = (nota1 + nota2 + nota3) / 3;
+        printf("%s: %.2f
+", nombre, promedio);
+    }
+    fclose(archivo);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Carlos: 15.33
+Maria: 17.67
+Pedro: 13.00
+Lucia: 18.33
+Juan: 16.00</div></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SEMANA 5 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📒 Semana 5: Estructuras (struct) en C y Presentación Golang</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1: Struct Mascota</h4>
+                        <p>Definición y uso básico de una estructura para representar una mascota.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+typedef struct {
+    char nombre[30];
+    char especie[30];
+    int edad;
+    float peso;
+} Mascota;
+
+int main() {
+    Mascota m1;
+    strcpy(m1.nombre, "Toggo");
+    strcpy(m1.especie, "Perro");
+    m1.edad = 3;
+    m1.peso = 8.5;
+    printf("Nombre: %s
+", m1.nombre);
+    printf("Especie: %s
+", m1.especie);
+    printf("Edad: %d años
+", m1.edad);
+    printf("Peso: %.1f kg
+", m1.peso);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Nombre: Toggo
+Especie: Perro
+Edad: 3 años
+Peso: 8.5 kg</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 2: Registros de Temperatura</h4>
+                        <p>Struct con hora, temperatura y ciudad. Calcula promedio de 3 registros.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+typedef struct {
+    int hora;
+    float temperatura;
+    char ciudad[20];
+} Registro;
+
+int main() {
+    Registro r1 = {8, 15.2, "Puno"};
+    Registro r2 = {12, 18.5, "Puno"};
+    Registro r3 = {18, 16.8, "Puno"};
+    printf("Hora: %d - Temp: %.1f - Ciudad: %s
+", r1.hora, r1.temperatura, r1.ciudad);
+    printf("Hora: %d - Temp: %.1f - Ciudad: %s
+", r2.hora, r2.temperatura, r2.ciudad);
+    printf("Hora: %d - Temp: %.1f - Ciudad: %s
+", r3.hora, r3.temperatura, r3.ciudad);
+    float promedio = (r1.temperatura + r2.temperatura + r3.temperatura) / 3;
+    printf("Promedio de temperatura: %.2f
+", promedio);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Hora: 8 - Temp: 15.2 - Ciudad: Puno
+Hora: 12 - Temp: 18.5 - Ciudad: Puno
+Hora: 18 - Temp: 16.8 - Ciudad: Puno
+Promedio de temperatura: 16.83</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 3: Arreglo de Alumnos</h4>
+                        <p>Array de structs de alumnos. Calcula promedio y encuentra el mejor alumno.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+typedef struct {
+    char nombre[30];
+    float nota;
+} Alumno;
+
+int main() {
+    Alumno alumnos[5] = {
+        {"Carlos", 14.5}, {"Maria", 18.0},
+        {"Pedro", 12.0},  {"Lucia", 19.5}, {"Juan", 16.0}
+    };
+    float suma = 0, mayor = alumnos[0].nota;
+    int posMayor = 0;
+    for(int i = 0; i &lt; 5; i++) {
+        printf("%s : %.1f
+", alumnos[i].nombre, alumnos[i].nota);
+        suma += alumnos[i].nota;
+        if(alumnos[i].nota &gt; mayor) { mayor = alumnos[i].nota; posMayor = i; }
+    }
+    printf("Promedio del salon: %.2f
+", suma / 5);
+    printf("Mejor alumno(a): %s con %.1f
+", alumnos[posMayor].nombre, alumnos[posMayor].nota);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Carlos : 14.5
+Maria : 18.0
+Pedro : 12.0
+Lucia : 19.5
+Juan : 16.0
+Promedio del salon: 16.00
+Mejor alumno(a): Lucia con 19.5</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 4: Inventario de Productos</h4>
+                        <p>Calcula valor total del inventario y detecta productos con stock bajo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+typedef struct {
+    char nombre[30];
+    float precio;
+    int stock;
+} Producto;
+
+int main() {
+    Producto inv[4] = {
+        {"Cuaderno", 5.50, 50}, {"Lapicero", 1.20, 8},
+        {"Borrador", 0.80, 5},  {"Regla 30cm", 3.00, 20}
+    };
+    float total = 0;
+    for(int i = 0; i &lt; 4; i++) {
+        printf("%s S/%.2f Stock: %d
+", inv[i].nombre, inv[i].precio, inv[i].stock);
+        total += inv[i].precio * inv[i].stock;
+    }
+    printf("
+Valor total del inventario: S/%.2f
+", total);
+    printf("
+Productos con stock bajo:
+");
+    for(int i = 0; i &lt; 4; i++)
+        if(inv[i].stock &lt; 10)
+            printf("%s S/%.2f Stock: %d
+", inv[i].nombre, inv[i].precio, inv[i].stock);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Cuaderno S/5.50 Stock: 50
+Lapicero S/1.20 Stock: 8
+Borrador S/0.80 Stock: 5
+Regla 30cm S/3.00 Stock: 20
+
+Valor total del inventario: S/397.60
+
+Productos con stock bajo:
+Lapicero S/1.20 Stock: 8
+Borrador S/0.80 Stock: 5</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 5: Boleta de Pago con Struct</h4>
+                        <p>Struct de empleado con funciones para calcular sueldo neto e imprimir boleta.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+typedef struct {
+    char nombre[30];
+    int codigo;
+    float sueldo_bruto;
+} Empleado;
+
+float calcular_neto(Empleado e) {
+    return e.sueldo_bruto - (e.sueldo_bruto * 0.13);
+}
+
+void imprimir_boleta(Empleado e) {
+    float descuento = e.sueldo_bruto * 0.13;
+    printf("============================
+");
+    printf("BOLETA DE PAGO
+");
+    printf("============================
+");
+    printf("Nombre: %s
+", e.nombre);
+    printf("Codigo: %d
+", e.codigo);
+    printf("Sueldo Bruto: S/%.2f
+", e.sueldo_bruto);
+    printf("Descuento AFP: S/%.2f
+", descuento);
+    printf("Sueldo Neto: S/%.2f
+", calcular_neto(e));
+    printf("============================
+");
+}
+
+int main() {
+    Empleado emp = {"Rosa Quispe", 1042, 2800.0};
+    imprimir_boleta(emp);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">============================
+BOLETA DE PAGO
+============================
+Nombre: Rosa Quispe
+Codigo: 1042
+Sueldo Bruto: S/2800.00
+Descuento AFP: S/364.00
+Sueldo Neto: S/2436.00
+============================</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 6: Sensores con Archivo</h4>
+                        <p>Guarda datos de 3 sensores en archivo y los lee para calcular temperatura promedio.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+typedef struct {
+    int id; char ubicacion[20];
+    float temperatura; float humedad;
+} Sensor;
+
+int main() {
+    Sensor sensores[3] = {
+        {1, "Sala A", 22.5, 60.0},
+        {2, "Sala B", 25.1, 55.0},
+        {3, "Exterior", 18.3, 75.0}
+    };
+    FILE *archivo = fopen("sensores.txt", "w");
+    for(int i = 0; i &lt; 3; i++)
+        fprintf(archivo, "%d,%s,%.1f,%.1f
+",
+                sensores[i].id, sensores[i].ubicacion,
+                sensores[i].temperatura, sensores[i].humedad);
+    fclose(archivo);
+    archivo = fopen("sensores.txt", "r");
+    Sensor temp; float sumaTemp = 0;
+    printf("ID Ubicacion Temp Humedad
+");
+    printf("--------------------------------
+");
+    while(fscanf(archivo, "%d,%[^,],%f,%f",
+                 &amp;temp.id, temp.ubicacion, &amp;temp.temperatura, &amp;temp.humedad) == 4) {
+        printf("%d %s %.1f %.1f%%
+", temp.id, temp.ubicacion, temp.temperatura, temp.humedad);
+        sumaTemp += temp.temperatura;
+    }
+    fclose(archivo);
+    printf("--------------------------------
+");
+    printf("Temperatura promedio: %.2fC
+", sumaTemp / 3);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">ID Ubicacion Temp Humedad
+--------------------------------
+1 Sala A 22.5 60.0%
+2 Sala B 25.1 55.0%
+3 Exterior 18.3 75.0%
+--------------------------------
+Temperatura promedio: 21.97C</div></div>
+                    </div>
+
+                    <!-- PPTX Golang -->
+                    <div class="exercise">
+                        <h4>🎯 Presentación: Golang — Lenguaje de Programación</h4>
+                        <p>Exposición sobre el lenguaje Go: estructuras de control, funciones, archivos y structs.</p>
+                        <div style="display:grid; gap:1.5rem; margin-top:1rem;">
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:0.5rem;">🖥️ Slide 1 — Portada</div>
+                                <p style="color:var(--text-muted); margin-bottom:0.5rem;">Golang · Lenguaje de Programación</p>
+                                <p style="color:var(--text-light); font-size:0.9rem;">Estructuras de Control · Funciones · Archivos · Structs<br>Curso: Lenguajes de Programación I · 2026<br>Universidad Nacional del Altiplano Puno</p>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 2 — ¿Qué es Go?</div>
+                                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+                                    <span style="background:rgba(0,243,255,0.1); border:1px solid var(--neon-blue); padding:0.4rem 0.8rem; border-radius:5px; font-size:0.85rem;">🏢 Google, 2009</span>
+                                    <span style="background:rgba(0,243,255,0.1); border:1px solid var(--neon-blue); padding:0.4rem 0.8rem; border-radius:5px; font-size:0.85rem;">⚡ Compilado &amp; Rápido</span>
+                                    <span style="background:rgba(0,243,255,0.1); border:1px solid var(--neon-blue); padding:0.4rem 0.8rem; border-radius:5px; font-size:0.85rem;">🔀 Concurrente</span>
+                                </div>
+                                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.5rem;">Ken Thompson – Rob Pike – Robert Griesemer</p>
+                                <div class="code-section"><div class="code-label">💻 Hola Mundo en Go</div>
+                                <pre><code>package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hola Mundo")
+}</code></pre></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 3 — Condicionales</div>
+                                <div class="code-section"><div class="code-label">💻 if · else if · else</div>
+                                <pre><code>package main
+import "fmt"
+
+func main() {
+    nota := 75
+    if nota >= 90 {
+        fmt.Println("Excelente")
+    } else if nota >= 60 {
+        fmt.Println("Aprobado")
+    } else {
+        fmt.Println("Reprobado")
+    }
+}</code></pre></div>
+                                <div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Aprobado</div></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 4 — Switch</div>
+                                <div class="code-section"><div class="code-label">💻 Switch — Múltiples casos</div>
+                                <pre><code>package main
+import "fmt"
+
+func main() {
+    dia := "Lunes"
+    switch dia {
+    case "Lunes":
+        fmt.Println("Inicio semana")
+    case "Viernes":
+        fmt.Println("¡Fin de semana!")
+    default:
+        fmt.Println("Día normal")
+    }
+}</code></pre></div>
+                                <div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Inicio semana</div></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 5 — Bucles for</div>
+                                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">💡 Go no tiene while ni do-while — solo for en 3 formas:</p>
+                                <div class="code-section"><div class="code-label">💻 For clásico</div><pre><code>for i := 0; i &lt; 5; i++ {
+    fmt.Println(i)
+}</code></pre></div>
+                                <div class="code-section"><div class="code-label">💻 For como while</div><pre><code>n := 0
+for n &lt; 5 {
+    n++
+    fmt.Println(n)
+}</code></pre></div>
+                                <div class="code-section"><div class="code-label">💻 For con range</div><pre><code>nums := []int{10, 20, 30}
+for i, v := range nums {
+    fmt.Println(i, v)
+}</code></pre></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 6 — Funciones</div>
+                                <div class="code-section"><div class="code-label">💻 Función sumar</div>
+                                <pre><code>package main
+import "fmt"
+
+func sumar(a int, b int) int {
+    return a + b
+}
+
+func main() {
+    resultado := sumar(5, 3)
+    fmt.Println("La suma es:", resultado)
+}</code></pre></div>
+                                <div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">La suma es: 8</div></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 7 — Manejo de Archivos</div>
+                                <div class="code-section"><div class="code-label">✏️ Escribir</div><pre><code>f, _ := os.Create("notas.txt")
+defer f.Close()
+f.WriteString("Hola Go!")</code></pre></div>
+                                <div class="code-section"><div class="code-label">📖 Leer</div><pre><code>f, _ := os.Open("notas.txt")
+defer f.Close()
+sc := bufio.NewScanner(f)
+for sc.Scan() {
+    fmt.Println(sc.Text())
+}</code></pre></div>
+                                <div class="code-section"><div class="code-label">➕ Append</div><pre><code>f, _ := os.OpenFile("notas.txt",
+    os.O_APPEND|os.O_WRONLY, 0644)
+defer f.Close()
+f.WriteString("Nueva línea")</code></pre></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 8 — Structs</div>
+                                <div class="code-section"><div class="code-label">💻 Definir y usar un struct</div>
+                                <pre><code>type Mascota struct {
+    Nombre string
+    Edad   int
+    Tipo   string
+}
+
+m := Mascota{
+    Nombre: "Luna",
+    Edad:   3,
+    Tipo:   "Perro",
+}
+
+fmt.Println(m.Nombre, m.Edad)  // → Luna 3</code></pre></div>
+                            </div>
+
+                            <div style="background:rgba(5,8,22,0.9); border:1px solid rgba(0,243,255,0.4); border-radius:12px; padding:1.5rem;">
+                                <div style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1.1rem; margin-bottom:1rem;">🖥️ Slide 9 — Struct con Método</div>
+                                <div class="code-section"><div class="code-label">💻 type struct + método</div>
+                                <pre><code>type Mascota struct {
+    Nombre string
+    Tipo   string
+}
+
+func (m Mascota) Presentar() {
+    fmt.Printf("Soy %s, un %s", m.Nombre, m.Tipo)
+}
+
+m := Mascota{"Luna", "Perro"}
+m.Presentar()  // → Soy Luna, un Perro</code></pre></div>
+                                <div class="output-section"><div class="output-label">📤 Salida</div><div class="output-box">Soy Luna, un Perro</div></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SEMANA 6 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📓 Semana 6: Práctica Integradora Final — Programación en C</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+
+                    <div class="exercise">
+                        <h4>Ejercicio 1: Sistema de Biblioteca</h4>
+                        <p>Gestiona préstamos de libros leyendo archivos de préstamo y marcando disponibilidad. Muestra libros disponibles y porcentaje prestado.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+typedef struct {
+    int codigo; char titulo[50]; char autor[30]; int disponible;
+} Libro;
+
+int main() {
+    Libro biblioteca[5] = {
+        {101, "Cien Anos de Soledad", "Garcia Marquez", 1},
+        {102, "Don Quijote", "Cervantes", 1},
+        {103, "El Principito", "Saint-Exupery", 1},
+        {104, "1984", "Orwell", 1},
+        {105, "Rayuela", "Cortazar", 1}
+    };
+    FILE *archivo;
+    // Crear archivos de préstamo
+    archivo = fopen("prestamo_1.txt", "w"); fprintf(archivo, "102"); fclose(archivo);
+    archivo = fopen("prestamo_2.txt", "w"); fprintf(archivo, "104"); fclose(archivo);
+    archivo = fopen("prestamo_3.txt", "w"); fprintf(archivo, "101"); fclose(archivo);
+    // Leer y procesar
+    char nombre[30]; int codigo_prestamo;
+    for(int i = 1; i &lt;= 3; i++) {
+        sprintf(nombre, "prestamo_%d.txt", i);
+        archivo = fopen(nombre, "r");
+        if(archivo != NULL) {
+            fscanf(archivo, "%d", &amp;codigo_prestamo);
+            for(int j = 0; j &lt; 5; j++)
+                if(biblioteca[j].codigo == codigo_prestamo) biblioteca[j].disponible = 0;
+            fclose(archivo);
+        }
+    }
+    printf("LIBROS DISPONIBLES:
+");
+    printf("%-5s %-30s %-20s
+", "Cod", "Titulo", "Autor");
+    printf("-------------------------------------------------------
+");
+    int contador = 0;
+    for(int i = 0; i &lt; 5; i++)
+        if(biblioteca[i].disponible == 1) {
+            printf("%-5d %-30s %-20s
+", biblioteca[i].codigo, biblioteca[i].titulo, biblioteca[i].autor);
+            contador++;
+        }
+    printf("
+Libros prestados: %.1f%%
+", ((5 - contador) / 5.0) * 100);
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">LIBROS DISPONIBLES:
+Cod   Titulo                         Autor
+-------------------------------------------------------
+103   El Principito                  Saint-Exupery
+105   Rayuela                        Cortazar
+
+Libros prestados: 60.0%</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 2: Análisis de Temperaturas con Funciones y Archivos</h4>
+                        <p>Lee 30 temperaturas de un archivo y genera un reporte con promedio, máxima, mínima y días calurosos.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+float calcular_promedio(float temps[], int n) {
+    float suma = 0;
+    for(int i = 0; i &lt; n; i++) suma += temps[i];
+    return suma / n;
+}
+float encontrar_maximo(float temps[], int n) {
+    float max = temps[0];
+    for(int i = 1; i &lt; n; i++) if(temps[i] &gt; max) max = temps[i];
+    return max;
+}
+float encontrar_minimo(float temps[], int n) {
+    float min = temps[0];
+    for(int i = 1; i &lt; n; i++) if(temps[i] &lt; min) min = temps[i];
+    return min;
+}
+int contar_calurosos(float temps[], int n) {
+    int count = 0;
+    for(int i = 0; i &lt; n; i++) if(temps[i] &gt; 25.0) count++;
+    return count;
+}
+int main() {
+    FILE *crear = fopen("temperaturas.txt", "w");
+    fprintf(crear,
+        "22.5 23.1 24.8 26.2 27.5 25.8 24.3 23.9 25.1 26.8
+"
+        "27.2 28.1 26.5 25.9 24.7 23.5 22.8 24.1 25.6 27.3
+"
+        "28.5 29.1 27.8 26.4 25.2 24.6 23.7 25.4 26.9 28.2
+");
+    fclose(crear);
+    float temperaturas[30]; int total = 0;
+    FILE *entrada = fopen("temperaturas.txt", "r");
+    while(fscanf(entrada, "%f", &amp;temperaturas[total]) == 1) total++;
+    fclose(entrada);
+    FILE *salida = fopen("reporte.txt", "w");
+    fprintf(salida, "REPORTE DE TEMPERATURAS
+=======================
+");
+    fprintf(salida, "Total de dias: %d
+", total);
+    fprintf(salida, "Temperatura promedio: %.2fC
+", calcular_promedio(temperaturas, total));
+    fprintf(salida, "Temperatura maxima: %.2fC
+", encontrar_maximo(temperaturas, total));
+    fprintf(salida, "Temperatura minima: %.2fC
+", encontrar_minimo(temperaturas, total));
+    fprintf(salida, "Dias calurosos (&gt;25C): %d
+", contar_calurosos(temperaturas, total));
+    fclose(salida);
+    printf("Archivos generados correctamente
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Archivos generados correctamente
+
+--- reporte.txt ---
+REPORTE DE TEMPERATURAS
+=======================
+Total de dias: 30
+Temperatura promedio: 25.69C
+Temperatura maxima: 29.10C
+Temperatura minima: 22.50C
+Dias calurosos (&gt;25C): 19</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 3: Inventario con Struct y Archivo</h4>
+                        <p>Calcula valor total del inventario y agrega un nuevo producto guardándolo en archivo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+typedef struct {
+    int codigo; char nombre[30]; float precio; int stock;
+} Producto;
+
+int main() {
+    Producto inventario[3] = {
+        {1, "Laptop", 2500.0, 10},
+        {2, "Mouse", 35.0, 50},
+        {3, "Teclado", 85.0, 30}
+    };
+    float valor_total = 0;
+    for(int i = 0; i &lt; 3; i++)
+        valor_total += inventario[i].precio * inventario[i].stock;
+    printf("Valor total del inventario: S/%.2f
+", valor_total);
+    Producto nuevo;
+    nuevo.codigo = 4;
+    strcpy(nuevo.nombre, "Monitor");
+    nuevo.precio = 450.0;
+    nuevo.stock = 15;
+    FILE *archivo = fopen("nuevo_producto.txt", "w");
+    fprintf(archivo, "%d,%s,%.2f,%d
+", nuevo.codigo, nuevo.nombre, nuevo.precio, nuevo.stock);
+    fclose(archivo);
+    printf("Producto agregado al archivo
+");
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Valor total del inventario: S/30800.00
+Producto agregado al archivo</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio 4: Promedios de Ventas por Mes</h4>
+                        <p>Función reutilizable para calcular el promedio de ventas de enero, febrero y marzo.</p>
+                        <div class="code-section"><div class="code-label">💻 Código C</div>
+                        <pre><code>#include &lt;stdio.h&gt;
+float calcular_promedio(float ventas[], int n) {
+    float suma = 0;
+    for(int i = 0; i &lt; n; i++) suma += ventas[i];
+    return suma / n;
+}
+int main() {
+    float ventas_enero[5]   = {1200, 1500, 1350, 1600, 1450};
+    float ventas_febrero[5] = {1400, 1650, 1500, 1700, 1550};
+    float ventas_marzo[5]   = {1300, 1550, 1450, 1650, 1500};
+    printf("Promedio Enero:   %.2f
+", calcular_promedio(ventas_enero, 5));
+    printf("Promedio Febrero: %.2f
+", calcular_promedio(ventas_febrero, 5));
+    printf("Promedio Marzo:   %.2f
+", calcular_promedio(ventas_marzo, 5));
+    return 0;
+}</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">Promedio Enero:   1420.00
+Promedio Febrero: 1560.00
+Promedio Marzo:   1490.00</div></div>
+                    </div>
+
+                    <!-- Python + Streamlit -->
+                    <div class="exercise">
+                        <h4>📅 Python con Framework Streamlit</h4>
+                        <p style="color:var(--neon-purple); font-family:'Orbitron',sans-serif; font-size:0.85rem;">Ejercicios en Python y desarrollo de aplicaciones web con Streamlit</p>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio Python 1: Suma de Dos Números</h4>
+                        <p>Programa básico en Python que solicita dos números y muestra su suma.</p>
+                        <div class="code-section"><div class="code-label">💻 Código Python</div>
+                        <pre><code>num1 = int(input("ingrese el primer numero: "))
+num2 = int(input("ingrese el segundo numero: "))
+resultado = num1 + num2
+print("la suma es:", resultado)</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 Salida</div>
+                        <div class="output-box">ingrese el primer numero: 5
+ingrese el segundo numero: 3
+la suma es: 8</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Ejercicio Python 2: Calculadora con Streamlit</h4>
+                        <p>Aplicación web interactiva con Streamlit que permite sumar, restar, multiplicar y dividir.</p>
+                        <div class="code-section"><div class="code-label">💻 Código Python + Streamlit</div>
+                        <pre><code>import streamlit as st
+
+st.title("Calculadora")
+m1 = st.number_input("N1", value=0)
+m2 = st.number_input("N2", value=0)
+operacion = st.selectbox("Seleccione la operación",
+    ("Sumar", "Restar", "Multiplicar", "Dividir"))
+
+if st.button("Calcular"):
+    if operacion == "Sumar":
+        r = m1 + m2
+        st.success(f"{m1} + {m2} = {r}")
+    elif operacion == "Restar":
+        r = m1 - m2
+        st.success(f"{m1} - {m2} = {r}")
+    elif operacion == "Multiplicar":
+        r = m1 * m2
+        st.success(f"{m1} x {m2} = {r}")
+    elif operacion == "Dividir":
+        if m2 != 0:
+            r = m1 / m2
+            st.success(f"{m1} ÷ {m2} = {r}")
+        else:
+            st.error("No se puede dividir entre 0")</code></pre></div>
+                        <div class="output-section"><div class="output-label">📤 App Web</div>
+                        <div class="output-box">Calculadora con interfaz web interactiva
+Soporta: Suma, Resta, Multiplicación, División
+Validación de división entre cero incluida</div></div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>🚀 Proyecto con Streamlit</h4>
+                        <p>Proyecto de industria desarrollado con el framework Streamlit de Python.</p>
+                        <div style="margin-top:1rem;">
+                            <a href="https://proyecto-de-industria-iw2qegsl9mrgap2mfi5zro.streamlit.app/" target="_blank"
+                               style="display:inline-block; font-family:'Orbitron',sans-serif; padding:0.8rem 2rem; border:2px solid var(--neon-blue); color:var(--neon-blue); text-decoration:none; border-radius:5px; letter-spacing:1px; transition:all 0.3s;"
+                               onmouseover="this.style.background='var(--neon-blue)'; this.style.color='var(--darker-bg)'"
+                               onmouseout="this.style.background='transparent'; this.style.color='var(--neon-blue)'">
+                                🔗 Ver Proyecto en Streamlit
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SEMANA 7 -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <h3>📔 Semana 7: Proyecto Final — Página Web</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="week-content">
+                    <div class="exercise">
+                        <h4>🌐 Proyecto Final: Página Web Intisazon</h4>
+                        <p>Proyecto final del curso: desarrollo completo de una página web. Incluye un video con la explicacion de la pagina web y la arquitectura utilizada.</p>
+                        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+                            <a href="https://intisazon.netlify.app/" target="_blank"
+                               style="display:inline-block; font-family:'Orbitron',sans-serif; padding:0.8rem 2rem; border:2px solid var(--neon-blue); color:var(--neon-blue); text-decoration:none; border-radius:5px; letter-spacing:1px; transition:all 0.3s;"
+                               onmouseover="this.style.background='var(--neon-blue)'; this.style.color='var(--darker-bg)'"
+                               onmouseout="this.style.background='transparent'; this.style.color='var(--neon-blue)'">
+                                🌐 Ver Página Web
+                            </a>
+                            <a href="https://youtu.be/azbs2PT7wfA?si=ayKbUdsbfU0Ya_ad" target="_blank"
+                               style="display:inline-block; font-family:'Orbitron',sans-serif; padding:0.8rem 2rem; border:2px solid var(--neon-purple); color:var(--neon-purple); text-decoration:none; border-radius:5px; letter-spacing:1px; transition:all 0.3s;"
+                               onmouseover="this.style.background='var(--neon-purple)'; this.style.color='white'"
+                               onmouseout="this.style.background='transparent'; this.style.color='var(--neon-purple)'">
+                                💻 Ver Video y Explicación
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     
     <section id="add">
         <div class="container">
